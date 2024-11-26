@@ -1,0 +1,60 @@
+101
+Nguyen Van A
+25
+0912345678
+Ha Noi
+Nam
+102
+Le Thi B
+30
+0987654321
+Ho Chi Minh
+Nu
+103
+Tran Van C
+45
+0934567890
+Da Nang
+Nam
+104
+Pham Thi D
+29
+0912341213
+Can Tho
+Nu
+105
+Nguyen Van E
+40
+0961234567
+Hai Phong
+Nam
+106
+Le Thi F
+23
+0923123123
+Hue
+Nu
+107
+Tran Van G
+50
+0939998888
+Nha Trang
+Nam
+108
+Pham Thi H
+31
+0948887777
+Vung Tau
+Nu
+109
+Nguyen Van I
+36
+0912223334
+Quang Ninh
+Nam
+110
+Le Thi J
+27
+0921112223
+Da Lat
+Nu

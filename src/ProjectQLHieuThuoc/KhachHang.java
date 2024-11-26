@@ -1,8 +1,7 @@
-import java.io.*;
-import java.util.Arrays;
+package ProjectQLHieuThuoc;
+
 import java.util.Scanner;
-import java.io.File;
-class hachHang
+public class KhachHang 
 {
     private int makh;
     private String tenkh;
@@ -10,8 +9,8 @@ class hachHang
     private long sdt;
     private String diaChi;
     private String gioiTinh;
-    public khachHang() {makh=0;tenkh=null;tuoi=0;sdt=0;diaChi=null;gioiTinh=null;}
-    public khachHang(int makh, String tenkh, int tuoi, long sdt,String diaChi, String gioiTinh)
+    public KhachHang() {makh=0;tenkh=null;tuoi=0;sdt=0;diaChi=null;gioiTinh=null;}
+    public KhachHang(int makh, String tenkh, int tuoi, long sdt,String diaChi, String gioiTinh)
     {
         this.makh = makh;
         this.tenkh = tenkh;
@@ -20,7 +19,7 @@ class hachHang
         this.diaChi = diaChi;
         this.gioiTinh = gioiTinh;
     }
-    public khachHang(khachHang d)
+    public KhachHang(KhachHang d)
     {
         d.makh = makh;
         d.tenkh = tenkh;
@@ -29,6 +28,8 @@ class hachHang
         d.diaChi = diaChi;
         d.gioiTinh = gioiTinh;
     }
+
+    //get-set
     public int getmakh()
     {
         return makh;
@@ -80,18 +81,33 @@ class hachHang
     public void nhap()
     {
         Scanner in = new Scanner(System.in);
-        System.out.print("Nhap ma khach hang: ");
-        makh = Integer.parseInt(in.nextLine());
-        System.out.print("Nhap ten khach hang: ");
-        tenkh = in.nextLine();
-        System.out.print("Nhap tuoi khach hang: ");
-        tuoi = Integer.parseInt(in.nextLine());
-        System.out.print("Nhap so dien thoai khach hang: ");
-        sdt = Long.parseLong(in.nextLine());
-        System.out.print("Nhap dia chi khach hang: ");
-        diaChi = in.nextLine();
-        System.out.print("Nhap gioi tinh khach hang: ");
-        gioiTinh = in.nextLine();
+        try 
+        {
+            System.out.print("Nhap ma khach hang: ");
+            makh = Integer.parseInt(in.nextLine());
+            System.out.print("Nhap ten khach hang: ");
+            tenkh = in.nextLine();
+            System.out.print("Nhap tuoi khach hang: ");
+            tuoi = Integer.parseInt(in.nextLine());
+            if (tuoi < 0 || tuoi > 120) {
+                System.out.println("Loi: Tuoi khong hop le!");
+                return;
+            }
+            System.out.print("Nhap so đien thoai khach hang: ");
+            sdt = Long.parseLong(in.nextLine());
+            System.out.print("Nhap đia chi khach hang: ");
+            diaChi = in.nextLine();
+            System.out.print("Nhap gioi tinh khach hang: ");
+            gioiTinh = in.nextLine();
+            System.out.println("__________________________________________________");
+        } 
+        catch (NumberFormatException e) 
+        {
+            System.out.println("Loi: Du lieu nhap khong hop le. Vui long thu lai.");
+        } finally 
+        {
+            in.close();
+        }
     }
     public void xuat()
     {
@@ -106,10 +122,10 @@ class hachHang
     public void sua()
     {
         int select = 0;
+        Scanner in = new Scanner(System.in);
         do {
-            Scanner in = new Scanner(System.in);
             System.out.println("=========================");
-            System.out.println("      | Chinh Sua |");
+            System.out.println("     | Chinh Sua |");
             System.out.println("=========================");
             System.out.println("1. Ma khach hang");
             System.out.println("2. Ten khach hang");
@@ -161,6 +177,7 @@ class hachHang
                     System.out.println("Lua chon khong hop le!");
             }
         }while (select != 8);
+        in.close();
     }
     public String toString() {
         return "KhachHang[" +
@@ -171,109 +188,5 @@ class hachHang
                 ", DiaChi=" + diaChi +
                 ", GioiTinh=" + gioiTinh +
                 ']';
-    }
-}
-
-class DSKH
-{
-    private khachHang a[] = new khachHang[0];
-    private int sl = 0;
-    public void nhaptay()
-    {
-        Scanner in = new Scanner(System.in);
-        System.out.print("So luong khach hang can nhap la: ");
-        int n = Integer.parseInt(in.nextLine());
-        a = new khachHang[n];
-        for(int i=0;i<n;i++)
-        {
-            a[i] = new khachHang();
-            System.out.println("Nhap thong tin khach hang thu " + (sl + 1) + ":");
-            a[i].nhap();
-            sl++;
-        }
-    }
-    public void xuattatca()
-    {
-        System.out.println("Danh sach thong tin khach hang");
-        for(int i=0;i<sl;i++)
-        {
-            a[i].xuat();
-        }
-        System.out.println("\n");
-    }
-    public void themkh()
-    {
-        Scanner in = new Scanner(System.in);
-        System.out.print("So luong khach hang can them la: ");
-        int k = Integer.parseInt(in.nextLine());
-        a=Arrays.copyOf(a,sl+k);
-        int tmp=sl;
-        for(int i=tmp;i<tmp+k;i++)
-        {
-            a[i] = new khachHang();
-            a[i].nhap();
-            sl++;
-        }
-    }
-    public int timkiem(int x)
-    {
-        for(int i=0;i<sl;i++)
-        {
-            if(a[i].getmakh() == x)
-                return i;
-        }
-        return 0;
-    }
-    public void suakh()
-    {
-        Scanner in = new Scanner(System.in);
-        System.out.print("Nhap ma khach hang can sua: ");
-        int i = Integer.parseInt(in.nextLine());
-        a[timkiem(i)].sua();
-    }
-    public void xoa()
-    {
-        Scanner in = new Scanner(System.in);
-        do 
-        {
-            System.out.println("Nhap ma khach hang can xoa: ");
-            int x = Integer.parseInt(in.nextLine());
-            if(timkiem(x) != 0 )
-            {
-                if(timkiem(x) == sl-1)
-                {
-                    a[sl-1]=null;
-                    sl--;
-                    return;
-                }
-                else
-                {
-                    for(int i = timkiem(x); i < sl; i++)
-                    {
-                        a[i]=a[i-1];
-                        return;
-                    }
-                }
-            }
-            else 
-            System.out.println("----Khong tim thay khach hang----");       
-        }
-        while(true);
-    }
-}
-
-public class QLKhachHang
-{
-    public static void main(String[] args) throws Exception
-    {
-        DSKH ds = new DSKH();
-        ds.nhaptay();
-        ds.xuattatca();
-        ds.themkh();
-        ds.xuattatca();
-        ds.suakh();
-        ds.xuattatca();
-        ds.xoa();
-        ds.xuattatca();
     }
 }
