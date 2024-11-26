@@ -117,16 +117,16 @@ public class DSKH
             File f = new File(namef);
             if (f.createNewFile()) 
             {
-                System.out.println("File created: " + f.getName());
+                System.out.println("Da tao File: " + f.getName());
             }
             else 
             {
-                System.out.println("File already exists.");
+                System.out.println("File da ton tai.");
             }
         } 
         catch (IOException e) 
         {
-            System.out.println("An error occurred.");
+            System.out.println("----Da xay ra loi----");
             e.printStackTrace();
         }
         finally
@@ -151,7 +151,7 @@ public class DSKH
         } 
         catch (FileNotFoundException e) 
         {
-            System.out.println("Khong tim thay file");
+            System.out.println("----Khong tim thay file----");
             e.printStackTrace();
         }
         finally
@@ -183,7 +183,7 @@ public class DSKH
         } 
         catch (IOException e) 
         {
-            System.out.println("Da xay ra loi");
+            System.out.println("----Da xay ra loi----");
             e.printStackTrace();
         }
         finally
