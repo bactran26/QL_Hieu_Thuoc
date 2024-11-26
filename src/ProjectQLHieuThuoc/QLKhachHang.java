@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.io.File;
-class khachHang
+class hachHang
 {
     private int makh;
     private String tenkh;

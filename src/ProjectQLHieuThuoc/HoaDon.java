@@ -5,15 +5,22 @@ public class HoaDon implements INhap, IXuat{
     protected int maHoaDon;
     private String ngayThanhToan;
     private int soLuongThuoc;
+    private static int soLuongHoaDon = 0;
 
-    public HoaDon() {}
+    public HoaDon() {
+        soLuongHoaDon++;
+    }
     public HoaDon(int maHoaDon, String ngayThanhToan, int soLuong) {
         this.maHoaDon = maHoaDon;
         this.ngayThanhToan = ngayThanhToan;
         this.soLuongThuoc = soLuong;
+        soLuongHoaDon++;
     }
 
     //get_set
+    public static int getSoLuongHoaDon() {
+        return soLuongHoaDon;
+    }
     public int getMaHoaDon() {
         return maHoaDon;
     }
