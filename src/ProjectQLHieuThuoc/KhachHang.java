@@ -3,90 +3,94 @@ package ProjectQLHieuThuoc;
 import java.util.Scanner;
 public class KhachHang 
 {
-    private int makh;
-    private String tenkh;
+    // Thuộc tính
+    private int maKhachHang;
+    private String tenKhachHang;
     private int tuoi;
-    private long sdt;
+    private String soDienThoai;
     private String diaChi;
     private String gioiTinh;
-    public KhachHang() {makh=0;tenkh=null;tuoi=0;sdt=0;diaChi=null;gioiTinh=null;}
-    public KhachHang(int makh, String tenkh, int tuoi, long sdt,String diaChi, String gioiTinh)
-    {
-        this.makh = makh;
-        this.tenkh = tenkh;
+
+    // Constructor mặc định
+    public KhachHang() {}
+
+    // Constructor đầy đủ tham số
+    public KhachHang(int maKhachHang, String tenKhachHang, int tuoi,String soDienThoai, String diaChi, String gioiTinh) {
+        this.maKhachHang = maKhachHang;
+        this.tenKhachHang = tenKhachHang;
         this.tuoi = tuoi;
-        this.sdt = sdt;
+        this.soDienThoai = soDienThoai;
         this.diaChi = diaChi;
         this.gioiTinh = gioiTinh;
     }
     public KhachHang(KhachHang d)
     {
-        d.makh = makh;
-        d.tenkh = tenkh;
+        d.maKhachHang = maKhachHang;
+        d.tenKhachHang = tenKhachHang;
         d.tuoi = tuoi;
-        d.sdt = sdt;
+        d.soDienThoai = soDienThoai;
         d.diaChi = diaChi;
         d.gioiTinh = gioiTinh;
     }
 
     //get-set
-    public int getmakh()
-    {
-        return makh;
+    public int getMaKhachHang() {
+        return maKhachHang;
     }
-    public void setmakh(int a)
-    {
-        makh = a;
+
+    public void setMaKhachHang(int  maKhachHang) {
+        this.maKhachHang = maKhachHang;
     }
-    public String gettenkh()
-    {
-        return tenkh;
+
+    public String getTenKhachHang() {
+        return tenKhachHang;
     }
-    public void settenkh(String ten)
-    {
-        tenkh = ten;
+
+    public void setTenKhachHang(String tenKhachHang) {
+        this.tenKhachHang = tenKhachHang;
     }
-    public int gettuoi()
-    {
+
+    public int getTuoi() {
         return tuoi;
     }
-    public void settuoi(int t)
-    {
-        tuoi = t;
+
+    public void setTuoi(int tuoi) {
+        this.tuoi = tuoi;
     }
-    public long getsdt()
-    {
-        return sdt;
+
+    public String getSoDienThoai() {
+        return soDienThoai;
     }
-    public void setsdt(long s)
-    {
-        sdt = s;
+
+    public void setSoDienThoai(String soDienThoai) {
+        this.soDienThoai = soDienThoai;
     }
-    public String getdiachi()
-    {
+
+    public String getDiaChi() {
         return diaChi;
     }
-    public void setdiachi(String d)
-    {
-        diaChi = d;
+
+    public void setDiaChi(String diaChi) {
+        this.diaChi = diaChi;
     }
-    public String getgioitinh()
-    {
+
+    public String getGioiTinh() {
         return gioiTinh;
     }
-    public void setgioitinh(String g)
-    {
-        gioiTinh = g;
+
+    public void setGioiTinh(String gioiTinh) {
+        this.gioiTinh = gioiTinh;
     }
+
     public void nhap()
     {
         Scanner in = new Scanner(System.in);
         try 
         {
             System.out.print("Nhap ma khach hang: ");
-            makh = Integer.parseInt(in.nextLine());
+            maKhachHang = Integer.parseInt(in.nextLine());
             System.out.print("Nhap ten khach hang: ");
-            tenkh = in.nextLine();
+            tenKhachHang = in.nextLine();
             System.out.print("Nhap tuoi khach hang: ");
             tuoi = Integer.parseInt(in.nextLine());
             if (tuoi < 0 || tuoi > 120) {
@@ -94,7 +98,7 @@ public class KhachHang
                 return;
             }
             System.out.print("Nhap so đien thoai khach hang: ");
-            sdt = Long.parseLong(in.nextLine());
+            soDienThoai = in.nextLine();
             System.out.print("Nhap đia chi khach hang: ");
             diaChi = in.nextLine();
             System.out.print("Nhap gioi tinh khach hang: ");
@@ -112,10 +116,10 @@ public class KhachHang
     public void xuat()
     {
         System.out.println("____________________________________________________________________________________");
-        System.out.print("| Ma khach hang: "+makh);
-        System.out.print("| Ten khach hang: "+tenkh);
+        System.out.print("| Ma khach hang: "+maKhachHang);
+        System.out.print("| Ten khach hang: "+tenKhachHang);
         System.out.print("| Tuoi: "+tuoi);
-        System.out.print("| SDT: "+sdt);
+        System.out.print("| SDT: "+soDienThoai);
         System.out.print("| Dia chi: "+diaChi);
         System.out.println("| Gioi tinh: "+gioiTinh);
     }
@@ -140,32 +144,32 @@ public class KhachHang
                 case 1:
                     System.out.print("Nhap ma khach hang:");
                     int a = in.nextInt();
-                    setmakh(a);
+                    setMaKhachHang(a);
                     break;
                 case 2:
                     System.out.print("Nhap ten khach hang:");
                     String ten = in.nextLine();
-                    settenkh(ten);
+                    setTenKhachHang(ten);
                     break;
                 case 3:
                     System.out.print("Nhap tuoi khach hang:");
                     int t = in.nextInt();
-                    settuoi(t);
+                    setTuoi(t);
                     break;
                 case 4:
                     System.out.print("Nhap so dien thoai khach hang:");
-                    Long s = in.nextLong();
-                    setsdt(s);
+                    String s = in.nextLine();
+                    setSoDienThoai(s);
                     break;
                 case 5:
                     System.out.print("Nhap dia chi khach hang:");
                     String d = in.nextLine();
-                    setdiachi(d);
+                    setDiaChi(d);
                     break;
                 case 6:
                     System.out.print("Nhap gioi tinh khach hang:");
                     String g = in.nextLine();
-                    setgioitinh(g);
+                    setGioiTinh(g);
                     break;
                 case 7:
                     nhap();
@@ -181,10 +185,10 @@ public class KhachHang
     }
     public String toString() {
         return "KhachHang[" +
-                "MaKhachHang=" + makh +
-                ", TenKhachHang='" + tenkh + '\'' +
+                "MaKhachHang=" + maKhachHang +
+                ", TenKhachHang='" + tenKhachHang + '\'' +
                 ", Tuoi='" + tuoi + '\'' +
-                ", SDT=" + sdt +
+                ", SDT=" + soDienThoai +
                 ", DiaChi=" + diaChi +
                 ", GioiTinh=" + gioiTinh +
                 ']';
