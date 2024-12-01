@@ -1,8 +1,8 @@
 package ProjectQLHieuThuoc;
 
 import java.util.Scanner;
-public class KhachHang 
-{
+
+public class KhachHang implements INhap, IXuat {
     // Thuộc tính
     private int maKhachHang;
     private String tenKhachHang;
@@ -15,7 +15,8 @@ public class KhachHang
     public KhachHang() {}
 
     // Constructor đầy đủ tham số
-    public KhachHang(int maKhachHang, String tenKhachHang, int tuoi,String soDienThoai, String diaChi, String gioiTinh) {
+    public KhachHang(int     maKhachHang, String tenKhachHang, int tuoi,
+                     String soDienThoai, String diaChi, String gioiTinh) {
         this.maKhachHang = maKhachHang;
         this.tenKhachHang = tenKhachHang;
         this.tuoi = tuoi;
@@ -23,17 +24,8 @@ public class KhachHang
         this.diaChi = diaChi;
         this.gioiTinh = gioiTinh;
     }
-    public KhachHang(KhachHang d)
-    {
-        d.maKhachHang = maKhachHang;
-        d.tenKhachHang = tenKhachHang;
-        d.tuoi = tuoi;
-        d.soDienThoai = soDienThoai;
-        d.diaChi = diaChi;
-        d.gioiTinh = gioiTinh;
-    }
 
-    //get-set
+    // Các getter và setter
     public int getMaKhachHang() {
         return maKhachHang;
     }
@@ -82,115 +74,68 @@ public class KhachHang
         this.gioiTinh = gioiTinh;
     }
 
-    public void nhap()
-    {
-        Scanner in = new Scanner(System.in);
-        try 
-        {
-            System.out.print("Nhap ma khach hang: ");
-            maKhachHang = Integer.parseInt(in.nextLine());
-            System.out.print("Nhap ten khach hang: ");
-            tenKhachHang = in.nextLine();
-            System.out.print("Nhap tuoi khach hang: ");
-            tuoi = Integer.parseInt(in.nextLine());
-            if (tuoi < 0 || tuoi > 120) {
-                System.out.println("Loi: Tuoi khong hop le!");
-                return;
-            }
-            System.out.print("Nhap so đien thoai khach hang: ");
-            soDienThoai = in.nextLine();
-            System.out.print("Nhap đia chi khach hang: ");
-            diaChi = in.nextLine();
-            System.out.print("Nhap gioi tinh khach hang: ");
-            gioiTinh = in.nextLine();
-            System.out.println("__________________________________________________");
-        } 
-        catch (NumberFormatException e) 
-        {
-            System.out.println("Loi: Du lieu nhap khong hop le. Vui long thu lai.");
-        } finally 
-        {
-            in.close();
-        }
+    // Phương thức nhập thông tin
+    @Override
+    public void nhap() {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Nhập mã khách hàng: ");
+        this.maKhachHang = sc.nextInt();
+        sc.nextLine();
+
+        System.out.print("Nhập tên khách hàng: ");
+        this.tenKhachHang = sc.nextLine();
+
+        System.out.print("Nhập tuổi: ");
+        this.tuoi = Integer.parseInt(sc.nextLine());
+
+        System.out.print("Nhập số điện thoại: ");
+        this.soDienThoai = sc.nextLine();
+
+        System.out.print("Nhập địa chỉ: ");
+        this.diaChi = sc.nextLine();
+
+        System.out.print("Nhập giới tính: ");
+        this.gioiTinh = sc.nextLine();
     }
-    public void xuat()
-    {
-        System.out.println("____________________________________________________________________________________");
-        System.out.print("| Ma khach hang: "+maKhachHang);
-        System.out.print("| Ten khach hang: "+tenKhachHang);
-        System.out.print("| Tuoi: "+tuoi);
-        System.out.print("| SDT: "+soDienThoai);
-        System.out.print("| Dia chi: "+diaChi);
-        System.out.println("| Gioi tinh: "+gioiTinh);
+
+    // Phương thức xuất thông tin
+    @Override
+    public void xuat() {
+        System.out.println("Thông tin khách hàng:");
+        System.out.println("Mã khách hàng: " + maKhachHang);
+        System.out.println("Tên khách hàng: " + tenKhachHang);
+        System.out.println("Tuổi: " + tuoi);
+        System.out.println("Số điện thoại: " + soDienThoai);
+        System.out.println("Địa chỉ: " + diaChi);
+        System.out.println("Giới tính: " + gioiTinh);
     }
-    public void sua()
-    {
-        int select = 0;
-        Scanner in = new Scanner(System.in);
-        do {
-            System.out.println("=========================");
-            System.out.println("     | Chinh Sua |");
-            System.out.println("=========================");
-            System.out.println("1. Ma khach hang");
-            System.out.println("2. Ten khach hang");
-            System.out.println("3. Tuoi");
-            System.out.println("4. SDT");
-            System.out.println("5. Dia chi");
-            System.out.println("6. Gioi tinh");
-            System.out.println("7. Tat ca");
-            System.out.println("8. Thoat");
-            select = Integer.parseInt(in.nextLine());
-            switch (select){
-                case 1:
-                    System.out.print("Nhap ma khach hang:");
-                    int a = in.nextInt();
-                    setMaKhachHang(a);
-                    break;
-                case 2:
-                    System.out.print("Nhap ten khach hang:");
-                    String ten = in.nextLine();
-                    setTenKhachHang(ten);
-                    break;
-                case 3:
-                    System.out.print("Nhap tuoi khach hang:");
-                    int t = in.nextInt();
-                    setTuoi(t);
-                    break;
-                case 4:
-                    System.out.print("Nhap so dien thoai khach hang:");
-                    String s = in.nextLine();
-                    setSoDienThoai(s);
-                    break;
-                case 5:
-                    System.out.print("Nhap dia chi khach hang:");
-                    String d = in.nextLine();
-                    setDiaChi(d);
-                    break;
-                case 6:
-                    System.out.print("Nhap gioi tinh khach hang:");
-                    String g = in.nextLine();
-                    setGioiTinh(g);
-                    break;
-                case 7:
-                    nhap();
-                    break;
-                case 8:
-                    System.out.println("Da luu va thoat chinh sua");
-                    break;
-                default:
-                    System.out.println("Lua chon khong hop le!");
-            }
-        }while (select != 8);
-        in.close();
-    }
+
+        // Phương thức sửa thông tin
+    @Override
     public String toString() {
-        return "KhachHang[" +
-                "MaKhachHang=" + maKhachHang +
-                ", TenKhachHang='" + tenKhachHang + '\'' +
-                ", Tuoi='" + tuoi + '\'' +
-                ", SDT=" + soDienThoai +
-                ", DiaChi=" + diaChi +
-                ", GioiTinh=" + gioiTinh +
-                ']';
+        return "Ma so khach hang: " + maKhachHang +
+                "\nHo va ten: " + tenKhachHang +
+                "\nTuoi: " + tuoi +
+                "\nSo dien thoai: " + soDienThoai +
+                "\nDia chi: " + diaChi +
+                "\nGioi tinh: " + gioiTinh;
+    }
+
+    public void sua(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Nhap ma khach hang moi: ");
+        this.setMaKhachHang(sc.nextInt());
+        System.out.println("Nhap ten khach hang moi: ");
+        this.setTenKhachHang(sc.nextLine());
+        System.out.println("nhap tuoi moi: ");
+        this.setTuoi(sc.nextInt());
+        sc.nextLine();
+        System.out.println("Nhap so dien thoai moi: ");
+        this.setSoDienThoai(sc.nextLine());
+        System.out.println("Nhap dia chi moi: ");
+        this.setDiaChi(sc.nextLine());
+        System.out.println("Nhap gioi tinh: ");
+        this.setGioiTinh(sc.nextLine());
     }
 }

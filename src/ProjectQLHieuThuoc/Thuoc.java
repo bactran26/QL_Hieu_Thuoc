@@ -11,14 +11,8 @@ public class Thuoc implements INhap, IXuat{
     private double giaThuoc;
     private HangSX hangSX;
 
-    private int maHangSX;
-    private String tenHangSX;
-    private String diaChiHangSX;
-    private long sdtHangSX;
 
-    public Thuoc(){
-        this.hangSX = new HangSX();
-    }
+    public Thuoc(){}
 
     public Thuoc(int maThuoc, String tenThuoc, String loaiThuoc, int soLuong, double giaNhapThuoc, double giaThuoc, HangSX hangSX){
         this.maThuoc = maThuoc;
@@ -80,6 +74,7 @@ public class Thuoc implements INhap, IXuat{
         this.hangSX = hangSX;
     }
 
+
     @Override
     public void nhap() {
         Scanner sc = new Scanner(System.in);
@@ -127,6 +122,23 @@ public class Thuoc implements INhap, IXuat{
     }
 
     public void sua(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Nhap ma san pham moi: ");
+        this.setMaThuoc(sc.nextInt());
+        System.out.println("Nhap ten san pham moi: ");
+        this.setTenThuoc(sc.nextLine());
+        System.out.println("Nhap loai san pham moi: ");
+        this.setLoaiThuoc(sc.nextLine());
+        System.out.println("Nhap so luong moi: ");
+        this.setSoLuong(sc.nextInt());
+        System.out.println("Nhap gia nhap moi: ");
+        this.setGiaNhapThuoc(sc.nextDouble());
+        System.out.println("Nhap gia thuoc moi: ");
+        this.setGiaThuoc(sc.nextDouble());
+        System.out.println("Nhap ten hang sx moi: ");
+        hangSX.setTenHangSX(sc.nextLine());
 
+        hangSX.sua();
     }
+    
 }

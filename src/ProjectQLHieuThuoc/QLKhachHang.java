@@ -3,13 +3,14 @@ package ProjectQLHieuThuoc;
 import java.util.Scanner;
 
 public class QLKhachHang {
-    private DSKH dskh;
+    private DSKhachHang dskh;
     Scanner s = new Scanner(System.in);
     String fileName = "C:\\Users\\OS\\IdeaProjects\\exercise\\src\\ProjectQLHieuThuoc/input_DSKhachHang.txt";
 
     public QLKhachHang() {
-        dskh = new DSKH();
+        dskh = new DSKhachHang();
     }
+
     public void menu() {
         dskh.docFile(fileName);
         int select;
@@ -17,15 +18,15 @@ public class QLKhachHang {
             System.out.println("[=======================]");
             System.out.println("\tKHACH HANG");
             System.out.println("[=======================]");
-            System.out.println("1. Nhap thong tin khach hang tu ban phim");
-            System.out.println("2. Them khach hang");
-            System.out.println("3. Sua thong tin khach hang");
-            System.out.println("4. Xoa khach hang");
-            System.out.println("5. Tim kiem khach hang");
-            System.out.println("6. Xem thong tin danh sach khach hang");
-            System.out.println("7. Thong ke danh sach khach hang");
-            System.out.println("8. Quay tro ve giao dien Menu chinh");
+            System.out.println("1. Them khach hang");
+            System.out.println("2. Sua thong tin khach hang");
+            System.out.println("3. Xoa khach hang");
+            System.out.println("4. Tim kiem khach hang");
+            System.out.println("5. Xem thong tin danh sach khach hang");
+            System.out.println("6. Quay tro ve giao dien Menu chinh");
             System.out.print("Chon: ");
+
+            // Kiểm tra input hợp lệ
             while (true) {
                 if (s.hasNextInt()) {
                     select = s.nextInt();
@@ -35,34 +36,42 @@ public class QLKhachHang {
                 s.nextLine();
             }
             s.nextLine();
+
             switch (select) {
                 case 1:
-                    dskh.nhaptay();
+                    dskh.them();
                     break;
                 case 2:
-                    dskh.themkh();
+                    dskh.sua();
                     break;
                 case 3:
-                    dskh.suakh();
-                    break;
-                case 4:
                     dskh.xoa();
                     break;
-                case 5:
+                case 4:
                     dskh.timKiem();
                     break;
+                case 5:
+                    dskh.xem();
+                    break;
                 case 6:
-                    dskh.xuattatca();
-                    break;
-                case 7:
-                    dskh.thongKe();
-                    break;
-                case 8:
                     dskh.ghiFile(fileName);
                     System.out.println("Da luu thay doi va quay tro ve Menu chinh.\n");
+                    return;
                 default:
                     System.out.println("Lua chon khong hop le. Vui long nhap lai.\n");
+                    continue;
             }
-        } while (select != 8);
+
+            // Hỏi người dùng có muốn tiếp tục chọn không
+            if (select != 6) {
+                System.out.print("Tiep tuc lua chon Menu? (y/n): ");
+                String choice = s.nextLine().trim().toLowerCase();
+                if (!choice.equals("y") && !choice.equals("yes") && !choice.equals("1")) {
+                    dskh.ghiFile(fileName);
+                    System.out.println("Da luu thay doi va quay tro ve Menu chinh.\n");
+                    break;
+                }
+            }
+        } while (true);
     }
 }

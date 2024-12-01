@@ -12,9 +12,10 @@ public class MenuHieuThuoc {
             System.out.println("=========================");
             System.out.println("1. Quan ly thuoc");
             System.out.println("2. Quan ly hang san xuat");
-            System.out.println("3. Quan ly nhan su");
-            System.out.println("4. Quan ly khac hang");
-            System.out.println("5. Quan ly hoa don");
+            System.out.println("3. Quan ly khac hang");
+            System.out.println("4. Quan ly hoa don");
+            System.out.println("5. Luu thay doi va thoat");
+            System.out.println("Nhap lua chon: ");
             select = sc.nextInt();
             sc.nextLine();
             switch (select){
@@ -23,27 +24,23 @@ public class MenuHieuThuoc {
                     ql1.menu();
                     break;
                 case 2:
-                    QLHangSX = new QLHangSX();
+                    QLHangSX ql2 = new QLHangSX();
                     ql2.menu();
                     break;
                 case 3:
-                    QLNhanSu ql3 = new QLHangSX();
+                    QLKhachHang ql3 = new QLKhachHang();
                     ql3.menu();
                     break;
                 case 4:
-                    QLKhachHang ql4 = new QLKhachHang();
+                    QLHoaDon ql4 = new QLHoaDon();
                     ql4.menu();
                     break;
                 case 5:
-                    QLHoaDon ql1 = new QLThuoc();
-                    ql5.menu();
-                    break;
-                case 6:
                     System.out.println("Da lu va thoat chuong trinh");
-                    ql6.menu();
                     break;
                 default:
                     System.out.println("Lua chon khong hop le!");
+                    break;
             }
         }while (select != 6);
     }
