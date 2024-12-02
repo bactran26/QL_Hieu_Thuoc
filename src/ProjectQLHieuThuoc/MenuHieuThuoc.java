@@ -1,4 +1,5 @@
 package ProjectQLHieuThuoc;
+import java.io.File;
 
 import java.util.Scanner;
 
@@ -36,7 +37,7 @@ public class MenuHieuThuoc {
                     ql4.menu();
                     break;
                 case 5:
-                    System.out.println("Da lu va thoat chuong trinh");
+                    System.out.println("Da luu va thoat chuong trinh");
                     break;
                 default:
                     System.out.println("Lua chon khong hop le!");

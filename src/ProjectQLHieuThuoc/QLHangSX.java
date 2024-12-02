@@ -2,10 +2,9 @@ package ProjectQLHieuThuoc;
 
 import java.util.Scanner;
 
-public class QLHangSX {
+public class QLHangSX extends QuanLi {
     private DSHangSX dshsx;
-    Scanner s = new Scanner(System.in);
-    String fileName = "C:\\Users\\OS\\IdeaProjects\\exercise\\src\\ProjectQLHieuThuoc/input_DSHangSX.txt";
+    String fileName = "input_DSHangSX.txt";
 
     public QLHangSX() {
         dshsx = new DSHangSX();
@@ -27,15 +26,8 @@ public class QLHangSX {
             System.out.print("Chon: ");
 
             // Kiểm tra input hợp lệ
-            while (true) {
-                if (s.hasNextInt()) {
-                    select = s.nextInt();
-                    break;
-                }
-                System.out.println("Khong hop le! Vui long nhap lai.");
-                s.nextLine();
-            }
-            s.nextLine();
+            select = kiemtraInput();// hàm được khai báo ở lớp trừu tượng
+            sc.nextLine();
 
             switch (select) {
                 case 1:
@@ -55,7 +47,7 @@ public class QLHangSX {
                     break;
                 case 6:
                     dshsx.ghiFile(fileName);
-                    System.out.println("Da luu thay doi va quay tro ve Menu chinh.\n");
+                    thongbaoThoatMenu();
                     return;
                 default:
                     System.out.println("Lua chon khong hop le. Vui long nhap lai.\n");
@@ -64,12 +56,10 @@ public class QLHangSX {
 
             // Hỏi người dùng có muốn tiếp tục chọn không
             if (select != 6) {
-                System.out.print("Tiep tuc lua chon Menu? (y/n): ");
-                String choice = s.nextLine().trim().toLowerCase();
-                if (!choice.equals("y") && !choice.equals("yes") && !choice.equals("1")) {
+                if (thoatMenu()) {// hàm được khai báo ở lớp trừu tượng
                     dshsx.ghiFile(fileName);
-                    System.out.println("Da luu thay doi va quay tro ve Menu chinh.\n");
-                    break;
+                    thongbaoThoatMenu();// hàm được khai báo ở lớp trừu tượng
+                    return;
                 }
             }
         } while (true);

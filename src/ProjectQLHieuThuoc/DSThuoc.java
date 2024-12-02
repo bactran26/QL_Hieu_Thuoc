@@ -11,68 +11,68 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class DSThuoc {
-        private ArrayList<Thuoc> dsThuoc;
-        private static int maThuoctt;
+    private ArrayList<Thuoc> dsThuoc;
+    private static int maThuoctt;
 
-        public ArrayList<Thuoc> getDsThuoc(){
-            return dsThuoc;
+    public ArrayList<Thuoc> getDsThuoc(){
+
+        return dsThuoc;
+    }
+
+    public void setDsThuoc(ArrayList<Thuoc> dsThuoc){
+        this.dsThuoc = dsThuoc;
+    }
+
+    public DSThuoc(){
+        dsThuoc = new ArrayList<>();
+    }
+
+    public DSThuoc(ArrayList<Thuoc> dsThuoc){
+        this.dsThuoc =dsThuoc;
+    }
+
+    public static int getMaThuoctt(){
+        return maThuoctt;
+    }
+
+    public static void setMaThuoctt(int maThuoctt){
+        DSThuoc.maThuoctt = maThuoctt;
+    }
+    public void xem(){
+        if (dsThuoc == null || dsThuoc.isEmpty()) {
+            System.out.println("\n=== DANH SACH THUOC TRONG ===");
+            return;
         }
+        System.out. println("\n=== DANH SACH THUOC ===");
+        System.out.println("Tong so thuoc: "+ dsThuoc.size());
+        System.out.println("----------------------------------------------------------------------");
+        System.out.printf("| %-4s | %-15s | %-12s | %-12s | %-12s | %-12s | %-15s |\n",
+                "Ma", "Ten Thuoc", "Loai Thuoc", "So luong", " Gia nhap thuoc", "Gia thuoc", "Hang san xuat");
+        System.out.println("----------------------------------------------------------------------");
 
-        public void setDsThuoc(ArrayList<Thuoc> dsThuoc){
-            this.dsThuoc = dsThuoc;
+        double tongGiaNhap = 0;
+        double tongGiaBan = 0;
+
+        for (Thuoc thuoc : dsThuoc) {
+            String giaNhapFormatted = String.format("%.0f", thuoc.getGiaNhapThuoc());
+            String giaBanFormatted = String.format("%.0f", thuoc.getGiaThuoc());
+            System.out.printf("| %-4d | %-15s | %-12s | %-12d | %-12s | %-12s | %-15s |\n",
+                    thuoc.getMaThuoc(),
+                    truncateString(thuoc.getTenThuoc(), 15),
+                    truncateString(thuoc.getLoaiThuoc(), 12),
+                    thuoc.getSoLuong(),
+                    giaNhapFormatted,
+                    giaBanFormatted,
+                    truncateString(thuoc.getHangSX().getTenHangSX(), 15));
+            tongGiaNhap += (thuoc.getSoLuong() * thuoc.getGiaNhapThuoc());
+            tongGiaBan += (thuoc.getSoLuong() * thuoc.getGiaThuoc());
+
         }
-
-        public DSThuoc(){
-            dsThuoc = new ArrayList<>();
-        }
-
-        public DSThuoc(ArrayList<Thuoc> dsThuoc){
-            this.dsThuoc =dsThuoc;
-        }
-
-        public static int getMaThuoctt(){
-            return maThuoctt;
-        }
-
-        public static void setMaThuoctt(int maThuoctt){
-            DSThuoc.maThuoctt = maThuoctt;
-        }
-
-        public void xem(){
-            if (dsThuoc == null || dsThuoc.isEmpty()) {
-                System.out.println("\n=== DANH SACH THUOC TRONG ===");
-                return;
-            }
-            System.out. println("\n=== DANH SACH THUOC ===");
-            System.out.println("Tong so thuoc: "+ dsThuoc.size());
-            System.out.println("----------------------------------------------------------------------");
-            System.out.printf("| %-4s | %-15s | %-12s | %-12s | %-12s | %-12s | %-15s |\n",
-                    "Ma", "Ten Thuoc", "Loai Thuoc", "So luong", " Gia nhap thuoc", "Gia thuoc", "Hang san xuat");
-            System.out.println("----------------------------------------------------------------------");
-
-            double tongGiaNhap = 0;
-            double tongGiaBan = 0;
-
-            for (Thuoc thuoc : dsThuoc) {
-                String giaNhapFormatted = String.format("%.0f", thuoc.getGiaNhapThuoc());
-                String giaBanFormatted = String.format("%.0f", thuoc.getGiaThuoc());
-                System.out.printf("| %-4d | %-15s | %-12s | %-12d | %-12s | %-12s | %-15s |\n",
-                        thuoc.getMaThuoc(),
-                        truncateString(thuoc.getTenThuoc(), 15),
-                        truncateString(thuoc.getLoaiThuoc(), 12),
-                        thuoc.getSoLuong(),
-                        giaNhapFormatted,
-                        giaBanFormatted,
-                        truncateString(thuoc.getHangSX().getTenHangSX(), 15));
-                tongGiaNhap += (thuoc.getSoLuong() * thuoc.getGiaNhapThuoc());
-                tongGiaBan += (thuoc.getSoLuong() * thuoc.getGiaThuoc());
-
-            }
         System.out.printf("Tong so tien nhap thuoc: %,.0f VND\n", tongGiaNhap);
         System.out.printf("Tong so tien ban thuoc: %,.0f VND\n", tongGiaBan);
-        }
+    }
 
-        public String truncateString(String str, int maxlength){
+    public String truncateString(String str, int maxlength){
             if (str == null || str.length() <= maxlength) {
                 return str;
             }
@@ -151,112 +151,111 @@ public class DSThuoc {
             System.out.println("Them thuoc Dong y thanh cong!");
         }
     }
-        public void sua(){
-            Scanner sc = new Scanner(System.in);
-            ArrayList<Thuoc> dsThuocTimThay = new ArrayList<>();
+    public void sua(){
+        Scanner sc = new Scanner(System.in);
+        ArrayList<Thuoc> dsThuocTimThay = new ArrayList<>();
 
-            // 1. tim thuoc can sua
-            System.out.println("\n===SUA THONG TIN THUOC ===");
-            System.out.println("Nhap ten thuoc can sua: ");
-            String tenThuocSua = sc.nextLine();
+        // 1. tim thuoc can sua
+        System.out.println("\n===SUA THONG TIN THUOC ===");
+        System.out.println("Nhap ten thuoc can sua: ");
+        String tenThuocSua = sc.nextLine();
 
-            // Tim va hien thi cac ten thuoc trung khop
-            for (Thuoc thuoc : dsThuoc){
-                if (thuoc.getTenThuoc().equalsIgnoreCase(tenThuocSua)){
-                    System.out.println("\nThong tin thuoc hien tai");
-                    thuoc.xuat();
-                    dsThuocTimThay.add(thuoc);
+        // Tim va hien thi cac ten thuoc trung khop
+        for (Thuoc thuoc : dsThuoc){
+            if (thuoc.getTenThuoc().equalsIgnoreCase(tenThuocSua)){
+                System.out.println("\nThong tin thuoc hien tai");
+                thuoc.xuat();
+                dsThuocTimThay.add(thuoc);
+            }
+        }
+        // kiem tra ket qua tim kiem
+        if (dsThuocTimThay.isEmpty()) {
+            System.out.println("Khong tim thay thuoc co ten " + tenThuocSua);
+            return;
+        }
+        Thuoc thuocCanSua;
+        if (dsThuocTimThay.size() == 1){
+            thuocCanSua = dsThuocTimThay.get(0);
+        }else {
+            System.out.println("Co nhieu thuoc trung ten. Vui long chon ma thuoc can sua");
+            System.out.println("Nhap ma thuoc: ");
+            int maThuoc = sc.nextInt();
+            thuocCanSua = null;
+            for (Thuoc thuoc : dsThuocTimThay){
+                if (thuoc.getMaThuoc() == maThuoc){
+                    thuocCanSua = thuoc;
+                    break;
                 }
             }
-            // kiem tra ket qua tim kiem
-            if (dsThuocTimThay.isEmpty()) {
-                System.out.println("Khong tim thay thuoc co ten " + tenThuocSua);
+            if (thuocCanSua == null){
+                System.out.println("khong tim thay thuoc co ma: " + maThuoc);
                 return;
             }
-            Thuoc thuocCanSua;
-            if (dsThuocTimThay.size() == 1){
-                thuocCanSua = dsThuocTimThay.get(0);
-            }else {
-                System.out.println("Co nhieu thuoc trung ten. Vui long chon ma thuoc can sua");
-                System.out.println("Nhap ma thuoc: ");
-                int maThuoc = sc.nextInt();
-                thuocCanSua = null;
-                for (Thuoc thuoc : dsThuocTimThay){
-                    if (thuoc.getMaThuoc() == maThuoc){
-                        thuocCanSua = thuoc;
-                        break;
-                    }
-                }
-                if (thuocCanSua == null){
-                    System.out.println("khong tim thay thuoc co ma: " + maThuoc);
-                    return;
-                }
-            }
-            //2. Thuc hien sua thong tin
-            sc.nextLine();
-
-            //Chon loai thuoc moi
-            System.out.println("\nChon loai thuoc moi");
-            System.out.println("1. Thuoc Tay");
-            System.out.println("2. Thuoc Dong y");
-
-            int luaChon = sc.nextInt();
-            Thuoc thuocMoi;
-            switch (luaChon){
-                case 1:
-                    thuocMoi = new ThuocTay();
-                    thuocMoi.setLoaiThuoc("Thuoc Tay");
-                    break;
-                case 2:
-                    thuocMoi = new ThuocDongY();
-                    thuocMoi.setLoaiThuoc("Thuoc dong y");
-                    break;
-                default:
-                    System.out.println("Lua chon khong hop le");
-                    return;
-            }
-            // Khởi tạo hangSX cho thuốc mới
-            thuocMoi.setHangSX(new HangSX());
-            // Nhap ma thuoc moi
-
-            System.out.println("\nNhap ma thuoc moi: ");
-            while(true){
-                int maMoi = sc.nextInt();
-
-                if (maMoi == 0){
-                    thuocMoi.setMaThuoc(thuocCanSua.getMaThuoc());
-                    break;
-                }
-
-                boolean maTrung = false;
-                for (Thuoc t : dsThuoc){
-                    if (t.getMaThuoc() == maMoi && t != thuocCanSua){
-                        maTrung = true;
-                        System.out.println("Ma thuoc da ton tai!");
-                        System.out.println("Vui long nhap ma khac hoac nhap 0 de giu nguyen ma cu");
-                        break;
-                    }
-                }
-                if (!maTrung){
-                    thuocMoi.setMaThuoc(maMoi);
-                    break;
-                }
-            }
-            System.out.println("\nNhap thong tin moi cho thuoc");
-            sc.nextLine();
-            thuocMoi.nhap();
-
-            // cap nhat vao danh sach chinh
-            for (int i = 0; i < dsThuoc.size(); i++) {
-                if (dsThuoc.get(i).getMaThuoc() == thuocCanSua.getMaThuoc()){
-                    dsThuoc.set(i, thuocMoi);
-                    System.out.println("\nCap nhat thong tin thuoc thanh cong");
-                    return;
-                }
-            }
-
         }
-        public void xoa() {
+        //2. Thuc hien sua thong tin
+        sc.nextLine();
+
+        //Chon loai thuoc moi
+        System.out.println("\nChon loai thuoc moi");
+        System.out.println("1. Thuoc Tay");
+        System.out.println("2. Thuoc Dong y");
+
+        int luaChon = sc.nextInt();
+        Thuoc thuocMoi;
+        switch (luaChon){
+            case 1:
+                thuocMoi = new ThuocTay();
+                thuocMoi.setLoaiThuoc("Thuoc Tay");
+                break;
+            case 2:
+                thuocMoi = new ThuocDongY();
+                thuocMoi.setLoaiThuoc("Thuoc dong y");
+                break;
+            default:
+                System.out.println("Lua chon khong hop le");
+                return;
+        }
+        // Khởi tạo hangSX cho thuốc mới
+        thuocMoi.setHangSX(new HangSX());
+        // Nhap ma thuoc moi
+
+        System.out.println("\nNhap ma thuoc moi: ");
+        while(true){
+            int maMoi = sc.nextInt();
+
+            if (maMoi == 0){
+                thuocMoi.setMaThuoc(thuocCanSua.getMaThuoc());
+                break;
+            }
+
+            boolean maTrung = false;
+            for (Thuoc t : dsThuoc){
+                if (t.getMaThuoc() == maMoi && t != thuocCanSua){
+                    maTrung = true;
+                    System.out.println("Ma thuoc da ton tai!");
+                    System.out.println("Vui long nhap ma khac hoac nhap 0 de giu nguyen ma cu");
+                    break;
+                }
+            }
+            if (!maTrung){
+                thuocMoi.setMaThuoc(maMoi);
+                break;
+            }
+        }
+        System.out.println("\nNhap thong tin moi cho thuoc");
+        sc.nextLine();
+        thuocMoi.nhap();
+
+        // cap nhat vao danh sach chinh
+        for (int i = 0; i < dsThuoc.size(); i++) {
+            if (dsThuoc.get(i).getMaThuoc() == thuocCanSua.getMaThuoc()){
+                dsThuoc.set(i, thuocMoi);
+                System.out.println("\nCap nhat thong tin thuoc thanh cong");
+                return;
+            }
+        }
+    }
+    public void xoa() {
             Scanner sc = new Scanner(System.in);
             ArrayList<Thuoc> dsThuocTimThay = new ArrayList<>();
 

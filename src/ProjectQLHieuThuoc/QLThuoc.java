@@ -2,10 +2,10 @@ package ProjectQLHieuThuoc;
 
 import java.util.Scanner;
 
-public class QLThuoc {
+public class QLThuoc extends QuanLi {
     private DSThuoc dsThuoc;
-    String fileName = "C:\\Users\\OS\\IdeaProjects\\exercise\\src\\ProjectQLHieuThuoc/input_DSThuoc.txt";
-    String fileNameHSX = "C:\\Users\\OS\\IdeaProjects\\exercise\\src\\ProjectQLHieuThuoc/input_DSHangSX.txt";
+    String fileName = "input_DSThuoc.txt";
+    String fileNameHSX = "input_DSHangSX.txt";
     DSHangSX dsHangSX;
     public QLThuoc() {
         dsHangSX = new DSHangSX();
@@ -14,7 +14,6 @@ public class QLThuoc {
     }
 
     public void menu() {
-        Scanner s = new Scanner(System.in);
         dsThuoc.taiDanhSachTuFile(fileName);
         int select;
         do {
@@ -29,15 +28,9 @@ public class QLThuoc {
             System.out.println("6. Quay tro ve giao dien Menu chinh");
             System.out.print("Chon: ");
 
-            while (true) {
-                if (s.hasNextInt()) {
-                    select = s.nextInt();
-                    break;
-                }
-                System.out.println("Khong hop le! Vui long nhap lai.");
-                s.nextLine();
-            }
-            s.nextLine();
+            // Kiểm tra input hợp lệ
+            select = kiemtraInput();// hàm được khai báo ở lớp trừu tượng
+            sc.nextLine();
 
             switch (select) {
                 case 1:
@@ -57,7 +50,7 @@ public class QLThuoc {
                     break;
                 case 6:
                     dsThuoc.xuatDanhSachRaFile(fileName);
-                    System.out.println("Da luu thay doi va quay tro ve Menu chinh.\n");
+                    thongbaoThoatMenu();
                     return;
                 default:
                     System.out.println("Lua chon khong hop le. Vui long nhap lai.\n");
@@ -66,12 +59,10 @@ public class QLThuoc {
 
             // Hỏi người dùng có muốn tiếp tục chọn không
             if (select != 6) {
-                System.out.print("Tiep tuc lua chon Menu? (y/n): ");
-                String choice = s.nextLine().trim().toLowerCase();
-                if (!choice.equals("y") && !choice.equals("yes") && !choice.equals("1")) {
+                if (thoatMenu()) {// hàm được khai báo ở lớp trừu tượng
                     dsThuoc.xuatDanhSachRaFile(fileName);
-                    System.out.println("Da luu thay doi va quay tro ve Menu chinh.\n");
-                    break;
+                    thongbaoThoatMenu();// hàm được khai báo ở lớp trừu tượng
+                    return;
                 }
             }
         } while (true);
