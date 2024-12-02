@@ -73,7 +73,7 @@ public class DSHoaDon {
 
         // Hiển thị danh sách khách hàng
         System.out.println("\nDanh sach khach hang:");
-        dsKH.xem();
+        dsKH.xuattatca();
 
         // Chọn khách hàng
         System.out.print("Nhap ma khach hang: ");

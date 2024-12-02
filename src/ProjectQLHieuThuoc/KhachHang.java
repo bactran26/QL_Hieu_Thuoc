@@ -74,7 +74,7 @@ public class KhachHang implements INhap, IXuat {
         this.gioiTinh = gioiTinh;
     }
 
-<<<<<<< HEAD
+    @Override
     public void nhap()
     {
         Scanner in = new Scanner(System.in);
@@ -172,43 +172,6 @@ public class KhachHang implements INhap, IXuat {
                     System.out.println("Lua chon khong hop le!");
             }
         }while (select != 8);
-=======
-    // Phương thức nhập thông tin
-    @Override
-    public void nhap() {
-        Scanner sc = new Scanner(System.in);
-
-        System.out.print("Nhập mã khách hàng: ");
-        this.maKhachHang = sc.nextInt();
-        sc.nextLine();
-
-        System.out.print("Nhập tên khách hàng: ");
-        this.tenKhachHang = sc.nextLine();
-
-        System.out.print("Nhập tuổi: ");
-        this.tuoi = Integer.parseInt(sc.nextLine());
-
-        System.out.print("Nhập số điện thoại: ");
-        this.soDienThoai = sc.nextLine();
-
-        System.out.print("Nhập địa chỉ: ");
-        this.diaChi = sc.nextLine();
-
-        System.out.print("Nhập giới tính: ");
-        this.gioiTinh = sc.nextLine();
-    }
-
-    // Phương thức xuất thông tin
-    @Override
-    public void xuat() {
-        System.out.println("Thông tin khách hàng:");
-        System.out.println("Mã khách hàng: " + maKhachHang);
-        System.out.println("Tên khách hàng: " + tenKhachHang);
-        System.out.println("Tuổi: " + tuoi);
-        System.out.println("Số điện thoại: " + soDienThoai);
-        System.out.println("Địa chỉ: " + diaChi);
-        System.out.println("Giới tính: " + gioiTinh);
->>>>>>> 29b365773e2929732cd2776baac8ac52cd11623a
     }
 
         // Phương thức sửa thông tin
@@ -220,22 +183,5 @@ public class KhachHang implements INhap, IXuat {
                 "\nSo dien thoai: " + soDienThoai +
                 "\nDia chi: " + diaChi +
                 "\nGioi tinh: " + gioiTinh;
-    }
-
-    public void sua(){
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Nhap ma khach hang moi: ");
-        this.setMaKhachHang(sc.nextInt());
-        System.out.println("Nhap ten khach hang moi: ");
-        this.setTenKhachHang(sc.nextLine());
-        System.out.println("nhap tuoi moi: ");
-        this.setTuoi(sc.nextInt());
-        sc.nextLine();
-        System.out.println("Nhap so dien thoai moi: ");
-        this.setSoDienThoai(sc.nextLine());
-        System.out.println("Nhap dia chi moi: ");
-        this.setDiaChi(sc.nextLine());
-        System.out.println("Nhap gioi tinh: ");
-        this.setGioiTinh(sc.nextLine());
     }
 }
