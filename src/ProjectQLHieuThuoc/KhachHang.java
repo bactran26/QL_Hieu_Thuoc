@@ -97,37 +97,35 @@ public class KhachHang
                 System.out.println("Loi: Tuoi khong hop le!");
                 return;
             }
-            System.out.print("Nhap so đien thoai khach hang: ");
+            System.out.print("Nhap so dien thoai khach hang: ");
             soDienThoai = in.nextLine();
-            System.out.print("Nhap đia chi khach hang: ");
+            System.out.print("Nhap dia chi khach hang: ");
             diaChi = in.nextLine();
             System.out.print("Nhap gioi tinh khach hang: ");
             gioiTinh = in.nextLine();
-            System.out.println("__________________________________________________");
+            System.out.println("\n");
         } 
         catch (NumberFormatException e) 
         {
             System.out.println("Loi: Du lieu nhap khong hop le. Vui long thu lai.");
-        } finally 
-        {
-            in.close();
-        }
+        } 
     }
     public void xuat()
     {
-        System.out.println("____________________________________________________________________________________");
+        System.out.println("__________________________________________________________________________________________________________________");
         System.out.print("| Ma khach hang: "+maKhachHang);
         System.out.print("| Ten khach hang: "+tenKhachHang);
         System.out.print("| Tuoi: "+tuoi);
         System.out.print("| SDT: "+soDienThoai);
         System.out.print("| Dia chi: "+diaChi);
-        System.out.println("| Gioi tinh: "+gioiTinh);
+        System.out.println("| Gioi tinh: "+gioiTinh+" |");
     }
     public void sua()
     {
         int select = 0;
         Scanner in = new Scanner(System.in);
         do {
+            System.out.println("\n");
             System.out.println("=========================");
             System.out.println("     | Chinh Sua |");
             System.out.println("=========================");
@@ -181,7 +179,6 @@ public class KhachHang
                     System.out.println("Lua chon khong hop le!");
             }
         }while (select != 8);
-        in.close();
     }
     public String toString() {
         return "KhachHang[" +
