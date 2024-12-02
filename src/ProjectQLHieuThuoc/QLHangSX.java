@@ -2,29 +2,27 @@ package ProjectQLHieuThuoc;
 
 import java.util.Scanner;
 
-public class QLHoaDon {
-    private DSHoaDon dsHoaDon;
+public class QLHangSX {
+    private DSHangSX dshsx;
     Scanner s = new Scanner(System.in);
-    String fileName = "C:\\Users\\OS\\IdeaProjects\\exercise\\src\\ProjectQLHieuThuoc/input_DSHoaDon.txt";
-    String fileNameKhachHang = "C:\\Users\\OS\\IdeaProjects\\exercise\\src\\ProjectQLHieuThuoc/input_DSKhachHang.txt";
-    String fileNameThuoc = "C:\\Users\\OS\\IdeaProjects\\exercise\\src\\ProjectQLHieuThuoc/input_DSThuoc.txt";
+    String fileName = "C:\\Users\\OS\\IdeaProjects\\exercise\\src\\ProjectQLHieuThuoc/input_DSHangSX.txt";
 
-    public QLHoaDon() {
-        dsHoaDon = new DSHoaDon();
+    public QLHangSX() {
+        dshsx = new DSHangSX();
     }
 
     public void menu() {
-        dsHoaDon.docFile(fileName);
+        dshsx.docFile(fileName);
         int select;
         do {
             System.out.println("[=======================]");
-            System.out.println("\tHOA DON");
+            System.out.println("\tHANG SAN XUAT");
             System.out.println("[=======================]");
-            System.out.println("1. Them hoa don");
-            System.out.println("2. Sua thong tin hoa don");
-            System.out.println("3. Xoa hoa don");
-            System.out.println("4. Tim kiem hoa don");
-            System.out.println("5. Xem danh sach hoa don");
+            System.out.println("1. Them hang san xuat");
+            System.out.println("2. Sua thong tin hang san xuat");
+            System.out.println("3. Xoa hang san xuat");
+            System.out.println("4. Tim kiem hang san xuat");
+            System.out.println("5. Xem danh sach hang san xuat");
             System.out.println("6. Quay tro ve giao dien Menu chinh");
             System.out.print("Chon: ");
 
@@ -41,22 +39,22 @@ public class QLHoaDon {
 
             switch (select) {
                 case 1:
-                    dsHoaDon.them();
+                    dshsx.them();
                     break;
                 case 2:
-                    dsHoaDon.sua();
+                    dshsx.sua();
                     break;
                 case 3:
-                    dsHoaDon.xoa();
+                    dshsx.xoa();
                     break;
                 case 4:
-                    dsHoaDon.timKiem();
+                    dshsx.timKiem();
                     break;
                 case 5:
-                    dsHoaDon.xem();
+                    dshsx.xem();
                     break;
                 case 6:
-                    dsHoaDon.ghiFile(fileName);
+                    dshsx.ghiFile(fileName);
                     System.out.println("Da luu thay doi va quay tro ve Menu chinh.\n");
                     return;
                 default:
@@ -69,7 +67,7 @@ public class QLHoaDon {
                 System.out.print("Tiep tuc lua chon Menu? (y/n): ");
                 String choice = s.nextLine().trim().toLowerCase();
                 if (!choice.equals("y") && !choice.equals("yes") && !choice.equals("1")) {
-                    dsHoaDon.ghiFile(fileName);
+                    dshsx.ghiFile(fileName);
                     System.out.println("Da luu thay doi va quay tro ve Menu chinh.\n");
                     break;
                 }
