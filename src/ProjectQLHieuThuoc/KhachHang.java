@@ -15,8 +15,7 @@ public class KhachHang implements INhap, IXuat {
     public KhachHang() {}
 
     // Constructor đầy đủ tham số
-    public KhachHang(int     maKhachHang, String tenKhachHang, int tuoi,
-                     String soDienThoai, String diaChi, String gioiTinh) {
+    public KhachHang(int maKhachHang, String tenKhachHang, int tuoi, String soDienThoai, String diaChi, String gioiTinh) {
         this.maKhachHang = maKhachHang;
         this.tenKhachHang = tenKhachHang;
         this.tuoi = tuoi;
@@ -134,7 +133,7 @@ public class KhachHang implements INhap, IXuat {
             switch (select){
                 case 1:
                     System.out.print("Nhap ma khach hang:");
-                    int a = in.nextInt();
+                    int a = Integer.parseInt(in.nextLine());
                     setMaKhachHang(a);
                     break;
                 case 2:
@@ -144,7 +143,7 @@ public class KhachHang implements INhap, IXuat {
                     break;
                 case 3:
                     System.out.print("Nhap tuoi khach hang:");
-                    int t = in.nextInt();
+                    int t = Integer.parseInt(in.nextLine());
                     setTuoi(t);
                     break;
                 case 4:
@@ -170,6 +169,7 @@ public class KhachHang implements INhap, IXuat {
                     break;
                 default:
                     System.out.println("Lua chon khong hop le!");
+                    break;
             }
         }while (select != 8);
     }

@@ -12,10 +12,10 @@ public class MenuHieuThuoc {
             System.out.println("=========================");
             System.out.println("1. Quan ly thuoc");
             System.out.println("2. Quan ly hang san xuat");
-            System.out.println("3. Quan ly khac hang");
+            System.out.println("3. Quan ly khach hang");
             System.out.println("4. Quan ly hoa don");
             System.out.println("5. Luu thay doi va thoat");
-            System.out.println("Nhap lua chon: ");
+            System.out.print("Nhap lua chon: ");
             select = sc.nextInt();
             sc.nextLine();
             switch (select){
