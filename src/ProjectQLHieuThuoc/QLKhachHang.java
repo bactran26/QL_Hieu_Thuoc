@@ -17,7 +17,7 @@ public class QLKhachHang {
         do {
             System.out.println("\n");
             System.out.println("[=======================]");
-            System.out.println("\tKHACH HANG");
+            System.out.println("      KHACH HANG");
             System.out.println("[=======================]");
             System.out.println("1. Nhap them khach hang tu ban phim");
             System.out.println("2. Sua thong tin khach hang");
@@ -30,7 +30,7 @@ public class QLKhachHang {
             select = Integer.parseInt(s.nextLine());
             switch (select) {
                 case 1:
-                    dskh.nhaptay();
+                    dskh.themkh();
                     break;
                 case 2:
                     dskh.suakh();
@@ -39,7 +39,7 @@ public class QLKhachHang {
                     dskh.xoa();
                     break;
                 case 4:
-                    dskh.timKiem();
+                    dskh.timkiemkh();
                     break;
                 case 5:
                     dskh.xuattatca();
