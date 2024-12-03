@@ -2,19 +2,20 @@ package ProjectQLHieuThuoc;
 
 import java.util.Scanner;
 
-public class QLThuoc extends QuanLi {
+public class QLThuoc extends QuanLy {
     private DSThuoc dsThuoc;
     String fileName = "input_DSThuoc.txt";
     String fileNameHSX = "input_DSHangSX.txt";
     DSHangSX dsHangSX;
     public QLThuoc() {
+        fileName = "..\\QL_Hieu_Thuoc\\out\\production\\exercise\\ProjectQLHieuThuoc\\input_DSHoaDon.txt";
+        ds = new DSHoaDon(fileName);
         dsHangSX = new DSHangSX();
         dsHangSX.docFile(fileNameHSX);
         dsThuoc = new DSThuoc();
     }
 
     public void menu() {
-        dsThuoc.taiDanhSachTuFile(fileName);
         int select;
         do {
             System.out.println("[======================]");
@@ -34,36 +35,27 @@ public class QLThuoc extends QuanLi {
 
             switch (select) {
                 case 1:
-                    dsThuoc.them();
+                    ds.them();
                     break;
                 case 2:
-                    dsThuoc.sua();
+                    ds.sua();
                     break;
                 case 3:
-                    dsThuoc.xoa();
+                    ds.xoa();
                     break;
                 case 4:
-                    dsThuoc.timKiem();
+                    ds.timKiem();
                     break;
                 case 5:
-                    dsThuoc.xem();
+                    ds.xem();
                     break;
                 case 6:
-                    dsThuoc.xuatDanhSachRaFile(fileName);
-                    thongbaoThoatMenu();
-                    return;
+                    if (thoatMenu()) {
+                        return;
+                    }
+                    break;
                 default:
-                    System.out.println("Lua chon khong hop le. Vui long nhap lai.\n");
-                    continue;
-            }
-
-            // Hỏi người dùng có muốn tiếp tục chọn không
-            if (select != 6) {
-                if (thoatMenu()) {// hàm được khai báo ở lớp trừu tượng
-                    dsThuoc.xuatDanhSachRaFile(fileName);
-                    thongbaoThoatMenu();// hàm được khai báo ở lớp trừu tượng
-                    return;
-                }
+                    System.out.println("Không hợp lệ!Vui lòng nhập lại:\n");
             }
         } while (true);
     }

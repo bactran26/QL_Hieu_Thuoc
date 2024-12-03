@@ -2,16 +2,13 @@ package ProjectQLHieuThuoc;
 
 import java.util.Scanner;
 
-public class QLHangSX extends QuanLi {
-    private DSHangSX dshsx;
-    String fileName = "input_DSHangSX.txt";
-
+public class QLHangSX extends QuanLy {
     public QLHangSX() {
-        dshsx = new DSHangSX();
+        fileName = "..\\QL_Hieu_Thuoc\\out\\production\\exercise\\ProjectQLHieuThuoc\\input_DSHangSX.txt";
+        ds = new DSHoaDon(fileName);
     }
 
     public void menu() {
-        dshsx.docFile(fileName);
         int select;
         do {
             System.out.println("[=======================]");
@@ -31,37 +28,29 @@ public class QLHangSX extends QuanLi {
 
             switch (select) {
                 case 1:
-                    dshsx.them();
+                    ds.them();
                     break;
                 case 2:
-                    dshsx.sua();
+                    ds.sua();
                     break;
                 case 3:
-                    dshsx.xoa();
+                    ds.xoa();
                     break;
                 case 4:
-                    dshsx.timKiem();
+                    ds.timKiem();
                     break;
                 case 5:
-                    dshsx.xem();
+                    ds.xem();
                     break;
                 case 6:
-                    dshsx.ghiFile(fileName);
-                    thongbaoThoatMenu();
-                    return;
+                    if (thoatMenu()) {
+                        return;
+                    }
+                    break;
                 default:
-                    System.out.println("Lua chon khong hop le. Vui long nhap lai.\n");
-                    continue;
+                    System.out.println("Không hợp lệ!Vui lòng nhập lại:\n");
             }
 
-            // Hỏi người dùng có muốn tiếp tục chọn không
-            if (select != 6) {
-                if (thoatMenu()) {// hàm được khai báo ở lớp trừu tượng
-                    dshsx.ghiFile(fileName);
-                    thongbaoThoatMenu();// hàm được khai báo ở lớp trừu tượng
-                    return;
-                }
-            }
         } while (true);
     }
 }

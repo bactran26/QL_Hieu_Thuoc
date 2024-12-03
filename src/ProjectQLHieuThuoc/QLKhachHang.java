@@ -2,16 +2,13 @@ package ProjectQLHieuThuoc;
 
 import java.util.Scanner;
 
-public class QLKhachHang extends QuanLi {
-    private DSKhachHang dskh;
-    String fileName = "input_DSKhachHang.txt";
-
+public class QLKhachHang extends QuanLy {
     public QLKhachHang() {
-        dskh = new DSKhachHang();
+        fileName = "..\\QL_Hieu_Thuoc\\out\\production\\exercise\\ProjectQLHieuThuoc\\input_DSKhachHang.txt";
+        ds = new DSKhachHang(fileName);
     }
 
     public void menu() {
-        dskh.docFile(fileName);
         int select;
         do {
             System.out.println("[=======================]");
@@ -31,36 +28,27 @@ public class QLKhachHang extends QuanLi {
 
             switch (select) {
                 case 1:
-                    dskh.them();
+                    ds.them();
                     break;
                 case 2:
-                    dskh.sua();
+                    ds.sua();
                     break;
                 case 3:
-                    dskh.xoa();
+                    ds.xoa();
                     break;
                 case 4:
-                    dskh.timKiem();
+                    ds.timKiem();
                     break;
                 case 5:
-                    dskh.xem();
+                    ds.xem();
                     break;
                 case 6:
-                    dskh.ghiFile(fileName);
-                    thongbaoThoatMenu();
-                    return;
+                    if (thoatMenu()) {
+                        return;
+                    }
+                    break;
                 default:
-                    System.out.println("Lua chon khong hop le. Vui long nhap lai.\n");
-                    continue;
-            }
-
-            // Hỏi người dùng có muốn tiếp tục chọn không
-            if (select != 6) {
-                if (thoatMenu()) {// hàm được khai báo ở lớp trừu tượng
-                    dskh.ghiFile(fileName);
-                    thongbaoThoatMenu();// hàm được khai báo ở lớp trừu tượng
-                    return;
-                }
+                    System.out.println("Không hợp lệ!Vui lòng nhập lại:\n");
             }
         } while (true);
     }

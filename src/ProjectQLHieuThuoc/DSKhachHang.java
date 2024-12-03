@@ -5,20 +5,18 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 
-public class DSKhachHang {
-    private ArrayList<KhachHang> dskh;
+public class DSKhachHang extends DanhSach{
+    private static ArrayList<KhachHang> dskh;
 
-    public DSKhachHang(){
+    public DSKhachHang(String fileName) {
        dskh = new ArrayList<>();
+       docFile(fileName);
     }
 
-    public ArrayList<KhachHang> getDskh() {
+    public static ArrayList<KhachHang> getDskh() {
         return dskh;
     }
 
-    public void setDskh(ArrayList<KhachHang> dskh) {
-        this.dskh = dskh;
-    }
 
     public void xem(){
         if (dskh != null && !dskh.isEmpty()){
@@ -59,6 +57,7 @@ public class DSKhachHang {
         khachHang.nhap();
         dskh.add(khachHang);
     }
+
     public void sua(){
         //1. tim khach hang can sua
         Scanner sc = new Scanner(System.in);
@@ -269,7 +268,7 @@ public class DSKhachHang {
                         + kh.getGioiTinh());
                 bw.newLine();
             }
-            System.out.println("Ghi file thanh cong!");
+            System.out.println("lưu danh sách khách hàng thành công!");
 
         } catch (IOException e) {
             System.out.println("Loi ghi file: " + e.getMessage());
@@ -306,12 +305,12 @@ public class DSKhachHang {
                     continue; // Bỏ qua dòng lỗi và đọc dòng tiếp theo
                 }
             }
-            System.out.println("Doc file thanh cong!");
+            System.out.println("Doc file khach hang thanh cong!");
 
         } catch (FileNotFoundException e) {
-            System.out.println("Khong tim thay file: " + e.getMessage());
+            System.out.println("Khong tim thay file khach hang: " + e.getMessage());
         } catch (IOException e) {
-            System.out.println("Loi doc file: " + e.getMessage());
+            System.out.println("Loi doc file khach hang: " + e.getMessage());
         }
     }
 

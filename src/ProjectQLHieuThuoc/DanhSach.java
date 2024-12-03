@@ -11,4 +11,8 @@ abstract class DanhSach extends SC {
     protected abstract void xoa();
 
     protected abstract void timKiem();
+
+    protected abstract void ghiFile(String tenFile);
+
+    protected abstract void docFile(String tenFile);
 }

@@ -23,20 +23,15 @@ public class DSHoaDon extends DanhSach{
         return dsHoaDon;
     }
 
-    public void setDsHoaDon(ArrayList<HoaDon> dsHoaDon) {
-        this.dsHoaDon = dsHoaDon;
-    }
-
     public void them() {
         // Tải dữ liệu từ file
-        DSKhachHang dsKH = new DSKhachHang();
-        dsKH.docFile("input_DSKhachHang.txt");
+        ArrayList<KhachHang> dsKH = DSKhachHang.getDskh();
 
         DSThuoc dsThuoc = new DSThuoc();
-        dsThuoc.taiDanhSachTuFile("input_DSThuoc.txt");
+        dsThuoc.taiDanhSachTuFile("..\\QL_Hieu_Thuoc\\out\\production\\exercise\\ProjectQLHieuThuoc\\input_DSThuoc.txt");
 
         // Kiểm tra dữ liệu đã tải
-        if (dsKH.getDskh().isEmpty()) {
+        if (dsKH.isEmpty()) {
             System.out.println("Danh sach khach hang trong!");
             return;
         }
@@ -57,13 +52,25 @@ public class DSHoaDon extends DanhSach{
 
     public void xem() {
         if (dsHoaDon.isEmpty()) {
-            System.out.println("\nDanh sach hoa don trong!");
+            System.out.println("\nDanh sách hóa đơn trống!");
             return;
         }
 
-        System.out.println("\n=== DANH SACH HOA DON ===");
+        System.out.println("\n=== DANH SÁCH HÓA ĐƠN ===");
+        System.out.println(
+                String.format(
+                        "%-5s|%-10s|%-15s|%-15s|%-15s",
+                        "STT",
+                        "Mã Hóa Đơn",
+                        "Ngày Thanh Toán",
+                        "Số Lượng Thuốc",
+                        "Mã Khách Hàng"
+                )
+        );
+        int i =1;
         for (HoaDon hd : dsHoaDon) {
-            hd.xuat();
+            System.out.print(String.format("%-5s|",i++ ));
+            System.out.println(hd.print());
             System.out.println("---------------------------");
         }
     }
@@ -181,7 +188,7 @@ public class DSHoaDon extends DanhSach{
         }
     }
 
-    public static void docFile(String tenFile) {
+    public void docFile(String tenFile) {
         try (FileReader fr = new FileReader(tenFile);
              BufferedReader br = new BufferedReader(fr)) {
 
@@ -192,9 +199,7 @@ public class DSHoaDon extends DanhSach{
             int soLuong = Integer.parseInt(br.readLine());
 
             // Tải dữ liệu từ file khách hàng và thuốc
-            DSKhachHang dsKH = new DSKhachHang();
-            dsKH.docFile("..\\QL_Hieu_Thuoc\\out\\production\\exercise\\ProjectQLHieuThuoc\\input_DSKhachHang.txt");
-            ArrayList<KhachHang> dsKhachHang = dsKH.getDskh();
+            ArrayList<KhachHang> dsKhachHang = DSKhachHang.getDskh();
 
             // Đọc thông tin từng hóa đơn
             for (int i = 0; i < soLuong; i++) {
@@ -236,7 +241,7 @@ public class DSHoaDon extends DanhSach{
         }
     }
 
-    public static void ghiFile(String tenFile) {
+    public void ghiFile(String tenFile) {
         try (FileWriter fw = new FileWriter(tenFile);
              BufferedWriter bw = new BufferedWriter(fw)) {
 
@@ -251,7 +256,7 @@ public class DSHoaDon extends DanhSach{
                 bw.newLine();
             }
             ChiTietHoaDon.ghiFile();
-            System.out.println("Ghi file thành công!");
+            System.out.println("Ghi file danh sách thành công!");
 
         } catch (IOException e) {
             System.out.println("Lỗi ghi file: " + e.getMessage());

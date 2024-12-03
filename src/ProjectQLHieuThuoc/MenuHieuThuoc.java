@@ -5,44 +5,33 @@ import java.util.Scanner;
 
 public class MenuHieuThuoc {
     public static void main(String[] argv){
+        Scanner sc = new Scanner(System.in);
+        QuanLy[] ql = new QuanLy[4];
+        ql[0] = new QLThuoc();
+        ql[1] = new QLHangSX();
+        ql[2] = new QLKhachHang();
+        ql[3] = new QLHoaDon();
         int select = 0;
         do {
-            Scanner sc = new Scanner(System.in);
             System.out.println("=========================");
-            System.out.println("\t MenuHieuThuoc");
+            System.out.println("\t Menu Hiệu Thuốc");
             System.out.println("=========================");
-            System.out.println("1. Quan ly thuoc");
-            System.out.println("2. Quan ly hang san xuat");
-            System.out.println("3. Quan ly khac hang");
-            System.out.println("4. Quan ly hoa don");
-            System.out.println("5. Luu thay doi va thoat");
-            System.out.println("Nhap lua chon: ");
+            System.out.println("1. Quản Lý Thuốc");
+            System.out.println("2. Quản Lý Hãng Sản Xuất");
+            System.out.println("3. Quản Lý Khách Hàng");
+            System.out.println("4. Quản Lý Hóa Đơn");
+            System.out.println("5. Lưu và Thoát");
+            System.out.print("Nhập lựa chọn: ");
             select = sc.nextInt();
             sc.nextLine();
-            switch (select){
-                case 1:
-                    QLThuoc ql1 = new QLThuoc();
-                    ql1.menu();
-                    break;
-                case 2:
-                    QLHangSX ql2 = new QLHangSX();
-                    ql2.menu();
-                    break;
-                case 3:
-                    QLKhachHang ql3 = new QLKhachHang();
-                    ql3.menu();
-                    break;
-                case 4:
-                    QLHoaDon ql4 = new QLHoaDon();
-                    ql4.menu();
-                    break;
-                case 5:
-                    System.out.println("Da luu va thoat chuong trinh");
-                    break;
-                default:
-                    System.out.println("Lua chon khong hop le!");
-                    break;
+            if (select > 0 && select < 5){
+                ql[select-1].menu();
+            } else if (select == 5) {
+                System.out.println("Đã lưu và thoát chương trình!");
+                return;
+            } else {
+                System.out.println("Lựa chọn không hợp lệ!\nVui lòng chọn lại!");
             }
-        }while (select != 6);
+        }while (true);
     }
 }

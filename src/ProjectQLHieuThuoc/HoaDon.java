@@ -114,6 +114,16 @@ public class HoaDon implements INhap, IXuat {
         );
     }
 
+    public String print() {
+        return String.format(
+                "|%-10s|%-15s|%-15s|%-15s",
+                this.maHoaDon,
+                this.ngayThanhToan,
+                this.soLuongThuoc,
+                this.khachHang.getMaKhachHang()
+        );
+    }
+
     @Override
     public void nhap() {
         Scanner sc = new Scanner(System.in);
@@ -130,6 +140,7 @@ public class HoaDon implements INhap, IXuat {
 
         while (taoMaMoi) {// tạo mã đơn hàng mới
             maHD++;
+            if (dsHoaDon.isEmpty()) {break;}
             for (HoaDon hd : dsHoaDon) {
                 if (hd.getMaHoaDon() != maHD) {
                     taoMaMoi = false;
@@ -157,13 +168,13 @@ public class HoaDon implements INhap, IXuat {
         this.ngayThanhToan = sc.nextLine();
 
         // Tìm và nhập thông tin khách hàng từ file
-        DSKhachHang dsKH = new DSKhachHang();
-        dsKH.docFile("input_DSKhachHang.txt");
-        System.out.println("\nDanh sach khach hang:");
-        dsKH.xem();
+        ArrayList<KhachHang> dsKH = DSKhachHang.getDskh();
         System.out.println("Nhap ma khach hang: ");
         int maKH = sc.nextInt();
-        for (KhachHang kh : dsKH.getDskh()) {
+        if (dsKH.isEmpty()) {
+            this.khachHang.setMaKhachHang(maKH);
+        }
+        for (KhachHang kh : dsKH) {
             if (kh.getMaKhachHang() == maKH) {
                 this.khachHang = kh;
                 break;
@@ -239,10 +250,9 @@ public class HoaDon implements INhap, IXuat {
         System.out.print("Ma khach hang:" + this.getKhachHang().getMaKhachHang() + " (0 de giu nguyen)| ");
         int maKH = sc.nextInt();
         if (maKH > 0) {
-            DSKhachHang dsKH = new DSKhachHang();
-            dsKH.docFile("input_DSKhachHang.txt");
+            ArrayList<KhachHang> dsKH = DSKhachHang.getDskh();
             boolean timThayKH = false;
-            for (KhachHang kh : dsKH.getDskh()) {
+            for (KhachHang kh : dsKH) {
                 if (kh.getMaKhachHang() == maKH) {
                     this.khachHang = kh;
                     timThayKH = true;
