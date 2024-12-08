@@ -2,19 +2,16 @@ package ProjectQLHieuThuoc;
 
 import java.util.Scanner;
 
-public class QLHoaDon {
+public class QLHoaDon extends QuanLy {
     private DSHoaDon dsHoaDon;
-    Scanner s = new Scanner(System.in);
-    String fileName = "C:\\Users\\OS\\IdeaProjects\\exercise\\src\\ProjectQLHieuThuoc/input_DSHoaDon.txt";
-    String fileNameKhachHang = "C:\\Users\\OS\\IdeaProjects\\exercise\\src\\ProjectQLHieuThuoc/input_DSKhachHang.txt";
-    String fileNameThuoc = "C:\\Users\\OS\\IdeaProjects\\exercise\\src\\ProjectQLHieuThuoc/input_DSThuoc.txt";
+    String fileName = "..\\QL_Hieu_Thuoc\\out\\production\\exercise\\ProjectQLHieuThuoc\\input_DSHoaDon.txt";
 
     public QLHoaDon() {
         dsHoaDon = new DSHoaDon();
+        dsHoaDon.docFile(fileName);
     }
 
     public void menu() {
-        dsHoaDon.docFile(fileName);
         int select;
         do {
             System.out.println("[=======================]");
@@ -29,15 +26,8 @@ public class QLHoaDon {
             System.out.print("Chon: ");
 
             // Kiểm tra input hợp lệ
-            while (true) {
-                if (s.hasNextInt()) {
-                    select = s.nextInt();
-                    break;
-                }
-                System.out.println("Khong hop le! Vui long nhap lai.");
-                s.nextLine();
-            }
-            s.nextLine();
+            select = kiemtraInput();// hàm được khai báo ở lớp trừu tượng
+            sc.nextLine();
 
             switch (select) {
                 case 1:
@@ -56,23 +46,13 @@ public class QLHoaDon {
                     dsHoaDon.xem();
                     break;
                 case 6:
-                    dsHoaDon.ghiFile(fileName);
-                    System.out.println("Da luu thay doi va quay tro ve Menu chinh.\n");
-                    return;
+                    if (thoatMenu()) {
+                        dsHoaDon.ghiFile(fileName);
+                        return;
+                    }
+                    break;
                 default:
                     System.out.println("Lua chon khong hop le. Vui long nhap lai.\n");
-                    continue;
-            }
-
-            // Hỏi người dùng có muốn tiếp tục chọn không
-            if (select != 6) {
-                System.out.print("Tiep tuc lua chon Menu? (y/n): ");
-                String choice = s.nextLine().trim().toLowerCase();
-                if (!choice.equals("y") && !choice.equals("yes") && !choice.equals("1")) {
-                    dsHoaDon.ghiFile(fileName);
-                    System.out.println("Da luu thay doi va quay tro ve Menu chinh.\n");
-                    break;
-                }
             }
         } while (true);
     }

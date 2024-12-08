@@ -74,6 +74,19 @@ public class Thuoc implements INhap, IXuat{
         this.hangSX = hangSX;
     }
 
+    public void xem() {
+        System.out.println(
+                String.format(
+                        "|%-15s|%-15s|%-15s|%-5s|%-15s|%-15s",
+                        this.maThuoc,
+                        this.tenThuoc,
+                        this.loaiThuoc,
+                        this.soLuong,
+                        this.giaThuoc,
+                        this.hangSX.getTenHangSX()
+                ));
+    }
+
 
     @Override
     public void nhap() {

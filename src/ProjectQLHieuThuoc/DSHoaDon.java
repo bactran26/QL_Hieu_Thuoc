@@ -8,132 +8,117 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
-public class DSHoaDon {
-    private ArrayList<HoaDon> dsHoaDon;
+public class DSHoaDon extends SC {
+    private static HoaDon[] dsHoaDon = new HoaDon[0];
+    private static int n = 0;
 
-    public DSHoaDon() {
-        dsHoaDon = new ArrayList<>();
-    }
+    public DSHoaDon() {}
 
     // Getters and Setters
-    public ArrayList<HoaDon> getDsHoaDon() {
+    public static HoaDon[] getDsHoaDon() {
         return dsHoaDon;
     }
 
-    public void setDsHoaDon(ArrayList<HoaDon> dsHoaDon) {
-        this.dsHoaDon = dsHoaDon;
+    //method
+
+    public static HoaDon timKiemHoaDonTheoMa(int maHoaDon) {
+        if (n == 0) {
+            return null;
+        }
+        for (HoaDon hd : dsHoaDon) {
+            if (hd.getMaHoaDon() == maHoaDon) {
+                return hd;
+            }
+        }
+        return null;
+    }
+
+    public static void themHoaDon(HoaDon hd) {
+        dsHoaDon = Arrays.copyOf(dsHoaDon, n + 1);
+        dsHoaDon[n] = hd;
+        n++;
+    }
+
+    public static int taoMaHoaDonNgauNhien() {
+        int ma = 1;
+        while (timKiemHoaDonTheoMa(ma) != null) {
+            ma++;
+        }
+        return ma;
     }
 
     public void them() {
-        Scanner sc = new Scanner(System.in);
-
-        // Tải dữ liệu từ file
-        DSKhachHang dsKH = new DSKhachHang();
-        dsKH.docFile("C:\\Users\\OS\\IdeaProjects\\exercise\\src\\ProjectQLHieuThuoc/input_DSKhachHang.txt");
-
-        DSThuoc dsThuoc = new DSThuoc();
-        dsThuoc.taiDanhSachTuFile("C:\\Users\\OS\\IdeaProjects\\exercise\\src\\ProjectQLHieuThuoc/input_DSThuoc.txt");
-
-        // Kiểm tra dữ liệu đã tải
-        if (dsKH.getDskh().isEmpty()) {
-            System.out.println("Danh sach khach hang trong!");
-            return;
-        }
-        if (dsThuoc.getDsThuoc().isEmpty()) {
-            System.out.println("Danh sach thuoc trong!");
-            return;
-        }
-
-        System.out.println("\n=== THEM HOA DON MOI ===");
+        System.out.println("\n=== TẠO HÓA ĐƠN ===");
         HoaDon hoaDon = new HoaDon();
 
-        // Nhập mã hóa đơn
-        System.out.print("Nhap ma hoa don: ");
-        int maHD;
-        while (true) {
-            maHD = sc.nextInt();
-            boolean trung = false;
-            for (HoaDon hd : dsHoaDon) {
-                if (hd.getMaHoaDon() == maHD) {
-                    System.out.print("Ma hoa don da ton tai! Nhap lai: ");
-                    trung = true;
-                    break;
-                }
-            }
-            if (!trung) break;
-        }
-        hoaDon.setMaHoaDon(maHD);
+        //Nhao hoa don
+        hoaDon.nhap();
 
-        // Nhập ngày thanh toán
-        sc.nextLine();
-        System.out.print("Nhap ngay thanh toan (dd/MM/yyyy): ");
-        hoaDon.setNgayThanhToan(sc.nextLine());
-
-        // Hiển thị danh sách khách hàng
-        System.out.println("\nDanh sach khach hang:");
-        dsKH.xuattatca();
-
-        // Chọn khách hàng
-        System.out.print("Nhap ma khach hang: ");
-        int maKH = sc.nextInt();
-        KhachHang khachHang = null;
-        for (KhachHang kh : dsKH.getDskh()) {
-            if (kh.getMaKhachHang() == maKH) {
-                khachHang = kh;
-                break;
-            }
-        }
-        if (khachHang == null) {
-            System.out.println("Khong tim thay khach hang!");
-            return;
-        }
-        hoaDon.setKhachHang(khachHang);
-
-        // Hiển thị danh sách thuốc
-        System.out.println("\nDanh sach thuoc:");
-        dsThuoc.xem();
-
-        // Chọn thuốc
-        System.out.print("Nhap ma thuoc: ");
-        int maThuoc = sc.nextInt();
-        Thuoc thuoc = dsThuoc.timKiemThuocTheoMa(maThuoc);
-        if (thuoc == null) {
-            System.out.println("Khong tim thay thuoc!");
-            return;
-        }
-        hoaDon.setThuoc(thuoc);
-
-        // Nhập số lượng mua
-        System.out.print("Nhap so luong mua: ");
-        int soLuong = sc.nextInt();
-        if (soLuong > thuoc.getSoLuong()) {
-            System.out.println("So luong ton khong du!");
-            return;
-        }
-        hoaDon.setSoLuongMua(soLuong);
+        System.out.println("\n=== THÔNG TIN HÓA ĐƠN MỚI ===");
+        hoaDon.xuat();
 
         // Thêm vào danh sách
-        dsHoaDon.add(hoaDon);
-        System.out.println("Them hoa don thanh cong!");
+        themHoaDon(hoaDon);
     }
 
     public void xem() {
-        if (dsHoaDon.isEmpty()) {
-            System.out.println("\nDanh sach hoa don trong!");
+        if (dsHoaDon == null || n == 0) {
+            System.out.println("Danh sách hóa đơn trống!");
             return;
         }
-
-        System.out.println("\n=== DANH SACH HOA DON ===");
-        for (HoaDon hd : dsHoaDon) {
-            hd.xuat();
-            System.out.println("---------------------------");
+        System.out.println("\n=== XEM DANH SACH HOA DON ===");
+        System.out.println("1. Chỉ xem thông tin cơ bản.");
+        System.out.println("2. Xem toàn bộ chi tiết hóa đơn.");
+        System.out.println("0. Thoát");
+        System.out.print("Nhap lua chon: ");
+        int choice = sc.nextInt();
+        sc.nextLine();
+        while (choice < 1 || choice > 2) {
+            if (choice == 0) {
+                return;
+            }
+            System.out.print("Lựa chọn không hợp lệ!\nVui lòng chọn lại:");
+        }
+        switch (choice) {
+            case 1:
+                System.out.println(
+                        String.format(
+                                "|%-15s|%-20s|%-15s|%-15s|%-15s",
+                                "MÃ HÓA ĐƠN",
+                                "NGÀY THANH TOÁN",
+                                "SỐ LOẠI THUỐC",
+                                "MÃ KHÁCH HÀNG",
+                                "TỔNG THANH TOÁN"
+                        ));
+                System.out.println("-".repeat(70));
+                for (HoaDon hd : dsHoaDon) {
+                    System.out.println(
+                            String.format(
+                                    "|%-15d|%-20s|%-15d|%-15d|%-15.2f",
+                                    hd.getMaHoaDon(),
+                                    hd.getNgayThanhToan(),
+                                    hd.getSoLuongMua(),
+                                    hd.getKhachHang().getMaKhachHang(),
+                                    hd.tinhTongTien()
+                            ));
+                }
+                break;
+            case 2:
+                for (HoaDon hd : dsHoaDon) {
+                    hd.xuat();
+                    System.out.println("---------------------------");
+                }
         }
     }
 
     public void sua() {
-        Scanner sc = new Scanner(System.in);
+        if ( n == 0) {
+            System.out.println("Danh sách hóa đơn trống!");
+            return;
+        }
         System.out.println("\n=== SUA HOA DON ===");
         System.out.print("Nhap ma hoa don can sua: ");
         int maHD = sc.nextInt();
@@ -151,29 +136,30 @@ public class DSHoaDon {
     }
 
     public void xoa() {
-        Scanner sc = new Scanner(System.in);
+        if ( n == 0) {
+            System.out.println("Danh sách hóa đơn trống!");
+            return;
+        }
         System.out.println("\n=== XOA HOA DON ===");
         System.out.print("Nhap ma hoa don can xoa: ");
         int maHD = sc.nextInt();
-
-        for (int i = 0; i < dsHoaDon.size(); i++) {
-            if (dsHoaDon.get(i).getMaHoaDon() == maHD) {
-                System.out.println("\nThong tin hoa don can xoa:");
-                dsHoaDon.get(i).xuat();
-
-                System.out.print("\nBan co chac muon xoa? (Y/N): ");
-                sc.nextLine();
-                String confirm = sc.nextLine();
-                if (confirm.equalsIgnoreCase("Y")) {
-                    dsHoaDon.remove(i);
+        for (int i = 0; i < n; i++) {
+            if (dsHoaDon[i].getMaHoaDon() == maHD) {
+                System.out.println("\nThong tin hoa don trung khop:");
+                dsHoaDon[i].xuat();
+                System.out.print("Bạn chắc muốn xóa hóa đơn? (y/n): ");
+                String choice = sc.nextLine().trim().toLowerCase();
+                if (!choice.equals("y") && !choice.equals("yes") && !choice.equals("1")) {
+                    for (int j = i; j < n - 1; j++) {
+                        dsHoaDon[j] = dsHoaDon[j + 1];
+                    }
+                    dsHoaDon = Arrays.copyOf(dsHoaDon, n - 1);
+                    n--;
                     System.out.println("Xoa hoa don thanh cong!");
-                } else {
-                    System.out.println("Da huy xoa hoa don!");
+                    return;
                 }
-                return;
             }
         }
-        System.out.println("Khong tim thay hoa don co ma " + maHD);
     }
 
     public void timKiem() {
@@ -244,99 +230,71 @@ public class DSHoaDon {
         }
     }
 
-    public void docFile(String tenFile) {
+    public static void docFile(String tenFile) {
         try (FileReader fr = new FileReader(tenFile);
              BufferedReader br = new BufferedReader(fr)) {
+            ChiTietHoaDon.docFile("..\\QL_Hieu_Thuoc\\out\\production\\exercise\\ProjectQLHieuThuoc\\input_ChiTietHoaDon.txt");
 
-            // Xóa dữ liệu cũ
-            dsHoaDon.clear();
-
-            // Đọc số lượng hóa đơn
-            int soLuong = Integer.parseInt(br.readLine());
-
-            // Tải dữ liệu từ file khách hàng và thuốc
-            DSKhachHang dsKH = new DSKhachHang();
-            dsKH.docFile("C:\\Users\\OS\\IdeaProjects\\exercise\\src\\ProjectQLHieuThuoc/input_DSKhachHang.txt");
-
-            DSThuoc dsThuoc = new DSThuoc();
-            dsThuoc.taiDanhSachTuFile("C:\\Users\\OS\\IdeaProjects\\exercise\\src\\ProjectQLHieuThuoc/input_DSThuoc.txt");
-
-            // Đọc thông tin từng hóa đơn
-            for (int i = 0; i < soLuong; i++) {
-                String line = br.readLine();
+            String line;
+            while ((line = br.readLine()) != null) {
                 String[] parts = line.split("\\|");
-
-                if (parts.length == 6) {
+                if (parts.length == 4) {
                     HoaDon hd = new HoaDon();
-
-                    // Đọc thông tin cơ bản
+                    // Đọc thông tin cơ bản  format maHD|ngayThanhToan|soLuongThuoc|maKhachHang
                     hd.setMaHoaDon(Integer.parseInt(parts[0]));
                     hd.setNgayThanhToan(parts[1]);
-
-                    // Tìm và set thuốc
-                    int maThuoc = Integer.parseInt(parts[2]);
-                    Thuoc thuoc = dsThuoc.timKiemThuocTheoMa(maThuoc);
-                    if (thuoc != null) {
-                        hd.setThuoc(thuoc);
-                    } else {
-                        System.out.println("Không tìm thấy thuốc có mã " + maThuoc + " cho hóa đơn " + parts[0]);
-                        continue;
-                    }
-
-                    // Set số lượng mua
-                    hd.setSoLuongMua(Integer.parseInt(parts[3]));
+                    hd.setSoLuongMua(Integer.parseInt(parts[2]));
 
                     // Tìm và set khách hàng
-                    int maKH = Integer.parseInt(parts[4]);
-                    KhachHang kh = null;
-                    for (KhachHang k : dsKH.getDskh()) {
-                        if (k.getMaKhachHang() == maKH) {
-                            kh = k;
-                            break;
-                        }
-                    }
-                    if (kh != null) {
-                        hd.setKhachHang(kh);
+                    int maKH = Integer.parseInt(parts[3]);
+                    KhachHang khachHang = DSKhachHang.timKiemKhachHangTheoMa(maKH);
+                    if (khachHang != null) {
+                        hd.setKhachHang(khachHang);
                     } else {
-                        System.out.println("Không tìm thấy khách hàng có mã " + maKH + " cho hóa đơn " + parts[0]);
-                        continue;
+                        System.out.println("Mã đơn hàng:" + hd.getMaHoaDon() + " có mã khách hàng không tồn tại!");
                     }
-
-                    dsHoaDon.add(hd);
+                    themHoaDon(hd);
                 }
             }
-            System.out.println("Đọc file thành công!");
-
+            ChiTietHoaDon[] dsChiTietHoaDon = ChiTietHoaDon.getDsChiTietHoaDon();
+            if (dsChiTietHoaDon.length == 0) {
+                return;
+            }
+            for (ChiTietHoaDon chitiet : dsChiTietHoaDon) {
+                if (chitiet != null) {
+                    HoaDon hd = timKiemHoaDonTheoMa(chitiet.getMaHD());
+                    if (hd != null) {
+                        hd.themChiTietHoaDon(chitiet);
+                    }
+                }
+            }
+            System.out.println("Đọc dữ liễu hóa đơn thành công!");
         } catch (FileNotFoundException e) {
-            System.out.println("Không tìm thấy file: " + e.getMessage());
+            System.out.println("Không tìm thấy file dữ liễu hóa đơn: " + e.getMessage());
         } catch (IOException e) {
-            System.out.println("Lỗi đọc file: " + e.getMessage());
+            System.out.println("Lỗi đọc file dữ liễu hóa đơn: " + e.getMessage());
         } catch (NumberFormatException e) {
-            System.out.println("Lỗi định dạng số: " + e.getMessage());
+            System.out.println("Lỗi định dạng số dữ liễu hóa đơn: " + e.getMessage());
         }
     }
 
-    public void ghiFile(String tenFile) {
+    public static void ghiFile(String tenFile) {
         try (FileWriter fw = new FileWriter(tenFile);
              BufferedWriter bw = new BufferedWriter(fw)) {
 
             // Ghi số lượng hóa đơn
-            bw.write(dsHoaDon.size() + "");
-            bw.newLine();
+            //bw.write(n);
+            //bw.newLine();
 
             // Ghi thông tin từng hóa đơn
+            ChiTietHoaDon.ghiFile("..\\QL_Hieu_Thuoc\\out\\production\\exercise\\ProjectQLHieuThuoc\\input_ChiTietHoaDon.txt");
             for (HoaDon hd : dsHoaDon) {
-                // Format: maHD|ngayThanhToan|maThuoc|soLuongMua|maKH|thanhTien
-                bw.write(String.format("%d|%s|%d|%d|%d|%.0f",
-                        hd.getMaHoaDon(),
-                        hd.getNgayThanhToan(),
-                        hd.getThuoc().getMaThuoc(),
-                        hd.getSoLuongMua(),
-                        hd.getKhachHang().getMaKhachHang(),
-                        hd.getThanhTien()));
+                // Format: maHD|ngayThanhToan|soLuongMua|maKH
+                bw.write(hd.toString());
                 bw.newLine();
             }
-            System.out.println("Ghi file thành công!");
+
+            System.out.println("Ghi file danh sách hóa đơn thành công!");
 
         } catch (IOException e) {
             System.out.println("Lỗi ghi file: " + e.getMessage());

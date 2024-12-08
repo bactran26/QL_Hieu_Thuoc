@@ -5,14 +5,14 @@ import java.util.Scanner;
 public class QLKhachHang {
     private DSKhachHang dskh;
     Scanner s = new Scanner(System.in);
-    String fileName = "C:\\Danh\\Code\\Code Visual Studio\\Java\\TEST_Project\\ProjectQLHieuThuoc\\input_DSKhachHang.txt";
+    String fileName = "..\\QL_Hieu_Thuoc\\out\\production\\exercise\\ProjectQLHieuThuoc\\input_DSKhachHang.txt";
 
     public QLKhachHang() {
         dskh = new DSKhachHang();
+        dskh.docFile(fileName);
     }
 
     public void menu() {
-        dskh.docFile(fileName);
         int select;
         do {
             System.out.println("\n");
@@ -42,7 +42,7 @@ public class QLKhachHang {
                     dskh.timkiemkh();
                     break;
                 case 5:
-                    dskh.xuattatca();
+                    DSKhachHang.xemDSKH();
                     break;
                 case 6:
                     dskh.thongKe();

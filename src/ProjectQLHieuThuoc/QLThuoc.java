@@ -4,18 +4,18 @@ import java.util.Scanner;
 
 public class QLThuoc {
     private DSThuoc dsThuoc;
-    String fileName = "C:\\Users\\OS\\IdeaProjects\\exercise\\src\\ProjectQLHieuThuoc/input_DSThuoc.txt";
-    String fileNameHSX = "C:\\Users\\OS\\IdeaProjects\\exercise\\src\\ProjectQLHieuThuoc/input_DSHangSX.txt";
+    String fileName = "..\\QL_Hieu_Thuoc\\out\\production\\exercise\\ProjectQLHieuThuoc\\input_DSThuoc.txt";
+    String fileNameHSX = "..\\QL_Hieu_Thuoc\\out\\production\\exercise\\ProjectQLHieuThuoc\\input_DSHangSX.txt";
     DSHangSX dsHangSX;
     public QLThuoc() {
         dsHangSX = new DSHangSX();
         dsHangSX.docFile(fileNameHSX);
         dsThuoc = new DSThuoc();
+        dsThuoc.taiDanhSachTuFile(fileName);
     }
 
     public void menu() {
         Scanner s = new Scanner(System.in);
-        dsThuoc.taiDanhSachTuFile(fileName);
         int select;
         do {
             System.out.println("[======================]");

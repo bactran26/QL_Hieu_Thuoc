@@ -112,13 +112,16 @@ public class KhachHang
     }
     public void xuat()
     {
-        System.out.println("__________________________________________________________________________________________________________________");
-        System.out.print("| Ma khach hang: "+maKhachHang);
-        System.out.print("| Ten khach hang: "+tenKhachHang);
-        System.out.print("| Tuoi: "+tuoi);
-        System.out.print("| SDT: "+soDienThoai);
-        System.out.print("| Dia chi: "+diaChi);
-        System.out.println("| Gioi tinh: "+gioiTinh+" |");
+        System.out.println(
+                String.format(
+                        "|%-15s|%-25s|%-5s|%-12s|%-20s|%-10s",
+                        this.maKhachHang,
+                        this.tenKhachHang,
+                        this.tuoi,
+                        this.soDienThoai,
+                        this.diaChi,
+                        this.gioiTinh
+                ));
     }
     public void sua()
     {

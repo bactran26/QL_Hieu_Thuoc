@@ -5,14 +5,15 @@ import java.util.Scanner;
 public class QLHangSX {
     private DSHangSX dshsx;
     Scanner s = new Scanner(System.in);
-    String fileName = "C:\\Users\\OS\\IdeaProjects\\exercise\\src\\ProjectQLHieuThuoc/input_DSHangSX.txt";
+    String fileName = "..\\QL_Hieu_Thuoc\\out\\production\\exercise\\ProjectQLHieuThuoc\\input_DSHangSX.txt";
 
     public QLHangSX() {
         dshsx = new DSHangSX();
+        dshsx.docFile(fileName);
     }
 
     public void menu() {
-        dshsx.docFile(fileName);
+
         int select;
         do {
             System.out.println("[=======================]");
